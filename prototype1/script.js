@@ -31,10 +31,11 @@ function span(w) {
 }
 
 $(document).ready(function() {
-    w = "Hello";
+    w = "Hello, this is my first test, this should work.... Maybe...";
     $("body").html(span(w));
     i = 0;
-    p = 0
+    p = 0;
+    $("span#"+i).css("text-decoration", "underline");
     $(this).keypress(function() {
         var k = (event.keyCode ? event.keyCode : event.which);
         if (s(k) === w[i]) {
