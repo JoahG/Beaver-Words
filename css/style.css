@@ -1,0 +1,51 @@
+/* CSS RESET */
+
+html,body,blockquote,code,h1,h2,h3,h4,h5,h6,p,pre{margin:0;padding:0}
+button,fieldset,form,input,legend,textarea,select{margin:0;padding:0}
+fieldset{border:0}
+a,a *{cursor:pointer}
+div{margin:0;padding:0;background-color:transparent;}
+hr,img{border:0}
+applet,iframe,object{border:0;margin:0;padding:0}
+button,input[type=button],input[type=image],input[type=reset],input[type=submit],label{cursor:pointer;}
+ul,li{list-style:none;margin:0;padding:0;}
+strong{font-weight:bold;}
+em{font-style:italic;}
+
+/* END CSS RESET */
+
+div#container {
+	width: 600px;
+	height: 400px;
+	margin: 5px auto;
+	position: relative;
+	z-index: -1;
+	overflow: hidden;
+}
+
+div.bank {
+	position: relative;
+	z-index: 1;
+	background-color: #7FFF00;
+	height: 100px;
+	width: 100%;
+}
+
+div#river {
+	position: relative;
+	z-index: 1;
+	height: 200px;
+	width: 100%;
+	background-color: #00CED1;
+}
+
+div#branch {
+	background: url(../img/branch.jpg);
+	text-align: center;
+	position: absolute;
+	z-index: 4;
+	right: -281px;
+	top: 200px;
+	width: 182px;
+	height: 13px;
+}
