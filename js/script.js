@@ -48,9 +48,6 @@ $(document).ready(function() {
     if (parseInt($("#branch.b"+(b-1).toString(10)).css("right"),10) === 20) {
         console.log("is it here?")
         clearInterval(y);
-        start()
-        break;
-    } else {
-      console.log("nope")
-    }
+        start();
+    } 
 });
