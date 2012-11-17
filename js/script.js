@@ -40,10 +40,17 @@ function newBranch() {
 $(document).ready(function() {
     function start() {
         newBranch()
-        while (parseInt($("#branch.b"+(b-1).toString(10)).css("right"),10) === -100) {
-          setInterval(function() {
+        y = setInterval(function() {
             $("#branch.b"+(b-1).toString(10)).css("right","+=1")
-        }, 50)}
+        }, 50)
     }
     start()
+    if (parseInt($("#branch.b"+(b-1).toString(10)).css("right"),10) === 20) {
+        console.log("is it here?")
+        clearInterval(y);
+        start()
+        break;
+    } else {
+      console.log("nope")
+    }
 });
