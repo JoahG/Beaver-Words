@@ -47,7 +47,7 @@ $(document).ready(function() {
         $("span#"+i).css("text-decoration", "none");
         i += 1;
         $("span#"+i).css("text-decoration", "underline");
-        if (i >= w.length) {
+        if (i === w.length) {
             $("body").append("  <span id='answer' style='text-decoration: underline;'>"+p.toString(10)+"</span>");
             if (p === w.length) {
                 $("body").append("   <span id='win' style='color:green;'> You Win! </span>");
