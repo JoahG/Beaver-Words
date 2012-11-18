@@ -2,10 +2,13 @@
 var b = 0
 
 // Dictionary of words
-var w = ["test","joah","haley"];
+var w = ["test","joah","haley"]
 
 // Current word
 var c = ""
+
+// Current Speed
+var q = 10
 
 // Translates keycode to letter
 function s(n) {
@@ -53,7 +56,7 @@ function start() {
     newBranch()
     y = setInterval(function() {
         $("div#branch.b"+(b-1).toString(10)).css("right","+=1")
-    }, 50)
+    }, q)
 }
 
 $(document).ready(function() {
