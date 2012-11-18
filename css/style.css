@@ -41,6 +41,7 @@ div#river {
 
 div#branch {
 	background: url(../img/branch.jpg);
+	color: white;
 	text-align: center;
 	position: absolute;
 	z-index: 4;
