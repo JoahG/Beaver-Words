@@ -67,7 +67,10 @@ $(document).ready(function() {
     // Counter for current letter (of current word)
     var i = 0
     $(this).keypress(function() {
+        // Key pressed
         var k = s(event.keyCode ? event.keyCode : event.which);
+
+        // Current letter's <span>
         var l = $("div#branch.b"+(b-1).toString(10)+" span#"+i.toString(10));
         if (k === l.text()) {
             l.css("color","green");
