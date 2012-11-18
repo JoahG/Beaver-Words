@@ -1,6 +1,9 @@
 // Number of branches
 var b = 0
 
+// Current Branch
+var h = 0
+
 // Dictionary of words
 var w = ["test","joah","haley"]
 
@@ -8,7 +11,9 @@ var w = ["test","joah","haley"]
 var c = ""
 
 // Current Speed
-var q = 10
+var q = 50
+
+var l;
 
 // Translates keycode to letter
 function s(n) {
@@ -54,19 +59,12 @@ function newBranch() {
 // Adds a new branch, and sets it in motion
 function start() {
     newBranch()
-    y = setInterval(function() {
-        $("div#branch.b"+(b-1).toString(10)).css("right","+=1")
-    }, q)
+    y = setInterval(function() {$("div#branch.b"+(b-1).toString(10)).css("right","+=1")}, q)
+    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === 20) {clearInterval(y);start()}}, 1)
 }
 
 $(document).ready(function() {
     start()
-    //if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === 20) {
-    //    console.log("is it here?")
-    //    clearInterval(y);
-    //    start();
-    //}
-
     // Counter for current letter (of current word)
     var i = 0
     $(this).keypress(function() {
@@ -74,14 +72,16 @@ $(document).ready(function() {
         var k = s(event.keyCode ? event.keyCode : event.which);
 
         // Current letter's <span>
-        var l = $("div#branch.b"+(b-1).toString(10)+" span#"+i.toString(10));
+        l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10));
         if (k === l.text()) {
             l.css("color","green");
             i += 1
         }
         if (i === c.length) {
-            $("div#branch.b"+(b-1).toString(10)).remove();
-            clearInterval(y);
+            $("div#branch.b"+h.toString(10)).remove();
+            clearInterval(y)
+            clearInterval(a)
+            h += 1
             i = 0;
             start();
         }
