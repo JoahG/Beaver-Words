@@ -48,19 +48,23 @@ function newBranch() {
     b += 1
 }
 
+// Adds a new branch, and sets it in motion
+function start() {
+    newBranch()
+    y = setInterval(function() {
+        $("div#branch.b"+(b-1).toString(10)).css("right","+=1")
+    }, 50)
+}
+
 $(document).ready(function() {
-    function start() {
-        newBranch()
-        y = setInterval(function() {
-            $("div#branch.b"+(b-1).toString(10)).css("right","+=1")
-        }, 50)
-    }
     start()
     //if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === 20) {
     //    console.log("is it here?")
     //    clearInterval(y);
     //    start();
-    //} 
+    //}
+
+    // Counter for current letter (of current word)
     var i = 0
     $(this).keypress(function() {
         var k = s(event.keyCode ? event.keyCode : event.which);
