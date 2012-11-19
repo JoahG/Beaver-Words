@@ -13,6 +13,13 @@ var c = ""
 // Current Speed
 var q = 50
 
+// Space between branches (in px)
+var o = 40
+
+// Frontmost branch for removal
+var e = 0
+
+// Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
 var l;
 
 // Translates keycode to letter
@@ -51,20 +58,37 @@ function span(w) {
 
 // Adds a new branch to the #container
 function newBranch() {
-    c = w[Math.floor((Math.random()*3))]
+    c = w[Math.floor((Math.random()*w.length))]
     $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c)+"</div>")
     b += 1
 }
 
 // Adds a new branch, and sets it in motion
 function start() {
+    // Create new branch
     newBranch()
-    y = setInterval(function() {$("div#branch.b"+(b-1).toString(10)).css("right","+=1")}, q)
-    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === 20) {clearInterval(y);start()}}, 1)
+
+    // Set the branch in motion, going one pixel every 'q' milliseconds
+    $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q*432, 'linear')
+
+    // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
+    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start()}}, 1)
+}
+
+function uUp() {
+    console.log("User Up 1")
+}
+
+function cpuUp() {
+    console.log("Computer Up 1")
 }
 
 $(document).ready(function() {
     start()
+
+    // When a branch hits 250px right margin, remove it
+    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1}}, 1)
+
     // Counter for current letter (of current word)
     var i = 0
     $(this).keypress(function() {
@@ -78,12 +102,14 @@ $(document).ready(function() {
             i += 1
         }
         if (i === c.length) {
+            if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) < o) {
+                start()
+            }
             $("div#branch.b"+h.toString(10)).remove();
-            clearInterval(y)
-            clearInterval(a)
+            uUp()
             h += 1
-            i = 0;
-            start();
+            i = 0
+            e +=1
         }
     });
 });
