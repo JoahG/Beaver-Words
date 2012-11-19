@@ -131,11 +131,12 @@ function cpuUp() {
 $(document).ready(function() {
     start()
 
-    // When a branch hits 250px right margin, remove it
-    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1}}, 1)
-
     // Counter for current letter (of current word)
     var i = 0
+
+    // When a branch hits 250px right margin, remove it
+    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; i = 0}}, 1)
+
     $(this).keypress(function() {
         // Key pressed
         var k = s(event.keyCode ? event.keyCode : event.which);
