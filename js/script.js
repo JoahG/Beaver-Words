@@ -157,7 +157,6 @@ $(document).ready(function() {
             i = 0
             e += 1
         }
-        // if (k === " ") {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; start()}
     });
 
     // When you click the "Play Again?" button, it starts the game, hides the #overlay (and #msg), and resets the variables
