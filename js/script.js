@@ -5,13 +5,13 @@ var b = 0
 var h = 0
 
 // Dictionary of words
-var w = ["test","joah","haley"]
+var w = ["Aeroplane" , "Air" , "Aircraft Carrier" , "Airforce" , "Airport" , "Album" , "Alphabet" , "Apple" , "Arm" , "Army" , "Baby" , "Baby" , "Backpack" , "Balloon" , "Banana" , "Bank" , "Barbecue" , "Bathroom" , "Bathtub" , "Bed" , "Bed" , "Bee" , "Bible" , "Bible" , "Bird" , "Bomb" , "Book" , "Boss" , "Bottle" , "Bowl" , "Box" , "Boy" , "Brain" , "Bridge" , "Butterfly" , "Button" , "Cappuccino" , "Car" , "Car-race" , "Carpet" , "Carrot" , "Cave" , "Chair" , "Chess Board" , "Chief" , "Child" , "Chisel" , "Chocolates" , "Church" , "Church" , "Circle" , "Circus" , "Circus" , "Clock" , "Clown" , "Coffee" , "Coffee-shop" , "Comet" , "Compact Disc" , "Compass" , "Computer" , "Crystal" , "Cup" , "Cycle" , "Data Base" , "Desk" , "Diamond" , "Drill" , "Drink" , "Drum" , "Ears" , "Earth" , "Egg" , "Electricity" , "Elephant" , "Eraser" , "Explosive" , "Eyes" , "Family" , "Fan" , "Feather" , "Festival" , "Film" , "Finger" , "Fire" , "Floodlight" , "Flower" , "Foot" , "Fork" , "Freeway" , "Fruit" , "Fungus" , "Game" , "Garden" , "Gas" , "Gate" , "Gemstone" , "Gloves" , "God" , "Grapes" , "Guitar" , "Hammer" , "Hat" , "Hieroglyph" , "Highway" , "Horse" , "Hose" , "Ice" , "Ice-cream" , "Insect" , "Jet fighter" , "Junk" , "Kaleidoscope" , "Kitchen" , "Knife" , "Leather jacket" , "Leg" , "Library" , "Liquid" , "Magnet" , "Man" , "Map" , "Maze" , "Meat" , "Meteor" , "Microscope" , "Milk" , "Milkshake" , "Mist" , "Money" , "Monster" , "Mosquito" , "Mouth" , "Nail" , "Navy" , "Necklace" , "Needle" , "Onion" , "Paintbrush" , "Pants" , "Parachute" , "Passport" , "Pebble" , "Pendulum" , "Pepper" , "Perfume" , "Pillow" , "Plane" , "Planet" , "Pocket" , "Post-office" , "Potato" , "Printer" , "Prison" , "Pyramid" , "Radar" , "Rainbow" , "Record" , "Restaurant" , "Rifle" , "Ring" , "Robot" , "Rock" , "Rocket" , "Roof" , "Room" , "Rope" , "Saddle" , "Salt" , "Sandpaper" , "Sandwich" , "Satellite" , "School" , "Ship" , "Shoes" , "Shop" , "Shower" , "Signature" , "Skeleton" , "Slave" , "Snail" , "Software" , "Solid" , "Space Shuttle" , "Spectrum" , "Sphere" , "Spice" , "Spiral" , "Spoon" , "Sports-car" , "Spot Light" , "Square" , "Staircase" , "Star" , "Stomach" , "Sun" , "Sunglasses" , "Surveyor" , "Swimming Pool" , "Sword" , "Table" , "Tapestry" , "Teeth" , "Telescope" , "Television" , "Tennis racquet" , "Thermometer" , "Tiger" , "Toilet" , "Tongue" , "Torch" , "Torpedo" , "Train" , "Treadmill" , "Triangle" , "Tunnel" , "Typewriter" , "Umbrella" , "Vacuum" , "Videotape" , "Vulture" , "Water" , "Weapon" , "Web" , "Wheelchair" , "Window" , "Worm" , "X-ray"]
 
-// Current word
-var c = ""
+// Word *order* (I realized I had a major problem here)
+var c = []
 
 // Current Speed
-var q = 50
+var q = 25
 
 // Space between branches (in px)
 var o = 40
@@ -27,6 +27,19 @@ var p = 0
 
 // Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
 var l;
+
+// Used to reset all the variables
+function reset() {
+    var b = 0
+    var h = 0
+    var c = ""
+    var q = 10
+    var o = 40
+    var e = 0
+    var y = 0
+    var p = 0
+    var l;
+}
 
 // Translates keycode to letter
 function s(n) {
@@ -64,8 +77,8 @@ function span(w) {
 
 // Adds a new branch to the #container
 function newBranch() {
-    c = w[Math.floor((Math.random()*w.length))]
-    $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c)+"</div>")
+    c.push(w[Math.floor((Math.random()*w.length))])
+    $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>")
     b += 1
 }
 
@@ -81,6 +94,7 @@ function start() {
     a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start()}}, 1)
 }
 
+// Stops the game, removes all branches from view, and shows the #overlay
 function stop(m) {
     $("#branch").remove()
     $("#overlay").show()
@@ -88,6 +102,7 @@ function stop(m) {
     $("#msg span").text(m)
 }
 
+// Increases User Score by 1
 function uUp() {
     console.log("User Up 1")
     $("#udam").removeClass('u' + y)
@@ -98,11 +113,12 @@ function uUp() {
     $("#udam").addClass('u' + y)
 }
 
+// Increases CPU Score by 1
 function cpuUp() {
     console.log("Computer Up 1")
     $("#cdam").removeClass('u' + p)
     p += 1
-    if (p === 1) {
+    if (p === 9) {
         stop("You Lose :(")
     }
     $("#cdam").addClass('u' + p)
@@ -126,7 +142,7 @@ $(document).ready(function() {
             l.css("color","green");
             i += 1
         }
-        if (i === c.length) {
+        if (i === c[h].length) {
             if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) < o) {
                 start()
             }
@@ -139,10 +155,11 @@ $(document).ready(function() {
         // if (k === " ") {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; start()}
     });
 
+    // When you click the "Play Again?" button, it starts the game, hides the #overlay (and #msg), and resets the variables
     $("#button").click(function() {
         start()
         $("#overlay").hide()
         $("#msg").hide()
-        
+        reset()
     });
 });
