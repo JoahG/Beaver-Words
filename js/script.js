@@ -157,11 +157,12 @@ function startGame(a) {
     if (a === "e") {
         w = easyWords;
         o = -10;
-        q = 30
+        q = 25
     }
     if (a === "m") {
         w = easyWords;
         o = -50;
+        q = 20
     }
     if (a === "h") {
         w = hardWords;
