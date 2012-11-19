@@ -81,10 +81,20 @@ function start() {
     a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start()}}, 1)
 }
 
+function stop(m) {
+    $("#branch").remove()
+    $("#overlay").show()
+    $("#msg").show()
+    $("#msg span").text(m)
+}
+
 function uUp() {
     console.log("User Up 1")
     $("#udam").removeClass('u' + y)
     y += 1
+    if (y === 9) {
+        stop("You Win! :)")
+    }
     $("#udam").addClass('u' + y)
 }
 
@@ -92,6 +102,9 @@ function cpuUp() {
     console.log("Computer Up 1")
     $("#cdam").removeClass('u' + p)
     p += 1
+    if (p === 1) {
+        stop("You Lose :(")
+    }
     $("#cdam").addClass('u' + p)
 }
 
@@ -124,5 +137,12 @@ $(document).ready(function() {
             e += 1
         }
         // if (k === " ") {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; start()}
+    });
+
+    $("#button").click(function() {
+        start()
+        $("#overlay").hide()
+        $("#msg").hide()
+        
     });
 });
