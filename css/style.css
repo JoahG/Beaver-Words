@@ -19,7 +19,8 @@ div#overlay {
 	position: absolute;
 	z-index: 15000;
 	width: 100%;
-	height: 100%;
+	height: 400px;
+	bottom: 0;
 	background-color: black;
 	opacity: 0.5;
 }
