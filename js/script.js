@@ -5,10 +5,14 @@ var b = 0
 var h = 0
 
 // Dictionary of words
-var w = ["Aeroplane" , "Air" , "Aircraft Carrier" , "Airforce" , "Airport" , "Album" , "Alphabet" , "Apple" , "Arm" , "Army" , "Baby" , "Baby" , "Backpack" , "Balloon" , "Banana" , "Bank" , "Barbecue" , "Bathroom" , "Bathtub" , "Bed" , "Bed" , "Bee" , "Bible" , "Bible" , "Bird" , "Bomb" , "Book" , "Boss" , "Bottle" , "Bowl" , "Box" , "Boy" , "Brain" , "Bridge" , "Butterfly" , "Button" , "Cappuccino" , "Car" , "Car-race" , "Carpet" , "Carrot" , "Cave" , "Chair" , "Chess Board" , "Chief" , "Child" , "Chisel" , "Chocolates" , "Church" , "Church" , "Circle" , "Circus" , "Circus" , "Clock" , "Clown" , "Coffee" , "Coffee-shop" , "Comet" , "Compact Disc" , "Compass" , "Computer" , "Crystal" , "Cup" , "Cycle" , "Data Base" , "Desk" , "Diamond" , "Drill" , "Drink" , "Drum" , "Ears" , "Earth" , "Egg" , "Electricity" , "Elephant" , "Eraser" , "Explosive" , "Eyes" , "Family" , "Fan" , "Feather" , "Festival" , "Film" , "Finger" , "Fire" , "Floodlight" , "Flower" , "Foot" , "Fork" , "Freeway" , "Fruit" , "Fungus" , "Game" , "Garden" , "Gas" , "Gate" , "Gemstone" , "Gloves" , "God" , "Grapes" , "Guitar" , "Hammer" , "Hat" , "Hieroglyph" , "Highway" , "Horse" , "Hose" , "Ice" , "Ice-cream" , "Insect" , "Jet fighter" , "Junk" , "Kaleidoscope" , "Kitchen" , "Knife" , "Leather jacket" , "Leg" , "Library" , "Liquid" , "Magnet" , "Man" , "Map" , "Maze" , "Meat" , "Meteor" , "Microscope" , "Milk" , "Milkshake" , "Mist" , "Money" , "Monster" , "Mosquito" , "Mouth" , "Nail" , "Navy" , "Necklace" , "Needle" , "Onion" , "Paintbrush" , "Pants" , "Parachute" , "Passport" , "Pebble" , "Pendulum" , "Pepper" , "Perfume" , "Pillow" , "Plane" , "Planet" , "Pocket" , "Post-office" , "Potato" , "Printer" , "Prison" , "Pyramid" , "Radar" , "Rainbow" , "Record" , "Restaurant" , "Rifle" , "Ring" , "Robot" , "Rock" , "Rocket" , "Roof" , "Room" , "Rope" , "Saddle" , "Salt" , "Sandpaper" , "Sandwich" , "Satellite" , "School" , "Ship" , "Shoes" , "Shop" , "Shower" , "Signature" , "Skeleton" , "Slave" , "Snail" , "Software" , "Solid" , "Space Shuttle" , "Spectrum" , "Sphere" , "Spice" , "Spiral" , "Spoon" , "Sports-car" , "Spot Light" , "Square" , "Staircase" , "Star" , "Stomach" , "Sun" , "Sunglasses" , "Surveyor" , "Swimming Pool" , "Sword" , "Table" , "Tapestry" , "Teeth" , "Telescope" , "Television" , "Tennis racquet" , "Thermometer" , "Tiger" , "Toilet" , "Tongue" , "Torch" , "Torpedo" , "Train" , "Treadmill" , "Triangle" , "Tunnel" , "Typewriter" , "Umbrella" , "Vacuum" , "Videotape" , "Vulture" , "Water" , "Weapon" , "Web" , "Wheelchair" , "Window" , "Worm" , "X-ray"]
+var hardWords = [ 'Aeroplane',  'Aircraft Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact Disc',  'Compass',  'Computer',  'Crystal',  'Data Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet fighter',  'Kaleidoscope',  'Kitchen',  'Leather jacket', "Lackadaisically" ,  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle',  'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',  'Pocket',  'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ]
+
+var easyWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk',  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ]
+
+var w = [];
 
 // Word *order* (I realized I had a major problem here)
-var c = []
+var c = [];
 
 // Current Speed
 var q = 25
@@ -17,7 +21,7 @@ var q = 25
 var z = 10000
 
 // Space between branches (in px)
-var o = -100
+var o = -50
 
 // Frontmost branch for removal
 var e = 0
@@ -33,11 +37,13 @@ var l;
 
 // Used to reset all the variables
 function reset() {
+    $("#udam").removeClass().addClass('u0')
+    $("#cdam").removeClass().addClass('u0')
     b = 0
     h = 0
-    c = ""
-    q = 10
-    o = 40
+    c = []
+    q = 25
+    o = -50
     e = 0
     y = 0
     p = 0
@@ -103,7 +109,8 @@ function stop(m) {
     $("body #branch").remove()
     $("#overlay").show()
     $("#msg").show()
-    $("#msg span").text(m)
+    $("#msg span").show().text(m)
+    $("#pa").show()
 }
 
 // Increases User Score by 1
@@ -128,8 +135,43 @@ function cpuUp() {
     $("#cdam").addClass('u' + p)
 }
 
-$(document).ready(function() {
+// Shows the "Choose Level" screen
+function showChoose() {
+    $("#overlay").show()
+    $("#msg").show()
+    $("#msg span").hide()
+    $("#pa").hide()
+    $("#choose").show()
+}
+
+// Starts the game
+function startGame(a) {
+    reset()
+    $("#overlay").hide()
+    $("#msg").hide()
+    $("#pa").hide()
+    $("#choose").hide()
+
+    // Sets variables to difficulty, 'w' is the dictionary of words, 'o' is the distance between branches, and 'q' is the speed (Lower is faster)
+    if (a === "e") {
+        w = easyWords;
+        o = -10;
+        q = 30
+    }
+    if (a === "m") {
+        w = easyWords;
+        o = -50;
+    }
+    if (a === "h") {
+        w = hardWords;
+        o = -100;
+        q = 15
+    }
     start()
+}
+
+$(document).ready(function() {
+    showChoose()
 
     // Counter for current letter (of current word)
     var i = 0
@@ -160,10 +202,18 @@ $(document).ready(function() {
     });
 
     // When you click the "Play Again?" button, it starts the game, hides the #overlay (and #msg), and resets the variables
-    $("#button").click(function() {
-        start()
-        $("#overlay").hide()
-        $("#msg").hide()
-        reset()
+    $("#pa").click(function() {
+        showChoose()
+    });
+
+    // Easy, Medium, and Hard buttons are simple function calls passing the level as the parameter
+    $("#easy").click(function() {
+        startGame("e");
+    });
+    $("#med").click(function() {
+        startGame("m");
+    });
+    $("#hard").click(function() {
+        startGame("h");
     });
 });
