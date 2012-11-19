@@ -100,7 +100,7 @@ function start() {
 
 // Stops the game, removes all branches from view, and shows the #overlay
 function stop(m) {
-    $("#branch").remove()
+    $("body #branch").remove()
     $("#overlay").show()
     $("#msg").show()
     $("#msg span").text(m)
