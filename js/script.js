@@ -89,6 +89,7 @@ function newBranch() {
     $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>")
     b += 1
     z -= 1
+    $("div#branch.b"+(b-1).toString(10)).css("right", $("div#branch.b"+(b-1).toString(10)).css("width"))
     $("div#branch.b"+(b-1).toString(10)).css("top", Math.floor(Math.random()*185) + 130).css("z-index", z);
 }
 
