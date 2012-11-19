@@ -19,6 +19,12 @@ var o = 40
 // Frontmost branch for removal
 var e = 0
 
+// Number of User branches 
+var y = 0
+
+// Number of CPU branches
+var p = 0
+
 // Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
 var l;
 
@@ -77,10 +83,16 @@ function start() {
 
 function uUp() {
     console.log("User Up 1")
+    $("#udam").removeClass('u' + y)
+    y += 1
+    $("#udam").addClass('u' + y)
 }
 
 function cpuUp() {
     console.log("Computer Up 1")
+    $("#cdam").removeClass('u' + p)
+    p += 1
+    $("#cdam").addClass('u' + p)
 }
 
 $(document).ready(function() {
@@ -109,7 +121,8 @@ $(document).ready(function() {
             uUp()
             h += 1
             i = 0
-            e +=1
+            e += 1
         }
+        // if (k === " ") {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; start()}
     });
 });
