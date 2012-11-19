@@ -13,8 +13,11 @@ var c = []
 // Current Speed
 var q = 25
 
+// Down-counter for z-index of branches
+var z = 10000
+
 // Space between branches (in px)
-var o = 40
+var o = -100
 
 // Frontmost branch for removal
 var e = 0
@@ -30,15 +33,14 @@ var l;
 
 // Used to reset all the variables
 function reset() {
-    var b = 0
-    var h = 0
-    var c = ""
-    var q = 10
-    var o = 40
-    var e = 0
-    var y = 0
-    var p = 0
-    var l;
+    b = 0
+    h = 0
+    c = ""
+    q = 10
+    o = 40
+    e = 0
+    y = 0
+    p = 0
 }
 
 // Translates keycode to letter
@@ -80,6 +82,8 @@ function newBranch() {
     c.push(w[Math.floor((Math.random()*w.length))])
     $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>")
     b += 1
+    z -= 1
+    $("div#branch.b"+(b-1).toString(10)).css("top", Math.floor(Math.random()*185) + 130).css("z-index", z);
 }
 
 // Adds a new branch, and sets it in motion
