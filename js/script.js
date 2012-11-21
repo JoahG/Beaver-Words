@@ -45,18 +45,18 @@ var l;
 
 // Settings variable for easy access/change
 var settings = {
-    e: function() {
-        w = easyWords;
-        o = -10;
-        q = 25;
-        kr = true;
+    e: function() {      // Easy Mode
+        w = easyWords;   // Dictionary to use
+        o = -10;         // Space in between branches
+        q = 25;          // Speed (Less is more)
+        kr = true;       // Capital letters disabled
     },
-    m: function() {
+    m: function() { // Medium Mode
         w = easyWords;
         o = -50;
         q = 20;
     },
-    h: function() {
+    h: function() { // Hard Mode
         w = hardWords;
         o = -100;
         q = 15;
