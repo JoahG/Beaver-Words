@@ -48,7 +48,7 @@ var settings = {
     e: function() {      // Easy Mode
         w = easyWords;   // Dictionary to use
         o = -10;         // Space in between branches
-        q = 25;          // Speed (Less is more)
+        q = 25;          // Speed (Less is more) - ms/px
         kr = true;       // Capital letters disabled
     },
     m: function() {      // Medium Mode
