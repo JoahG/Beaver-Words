@@ -44,7 +44,7 @@ div#msg {
 	background-color: white;
 }
 
-div#msg #pa {
+div#msg #pa, div#msg #levelup #begin {
 	position: absolute;
 	font-size: 12px;
 	z-index: 0;
@@ -56,8 +56,8 @@ div#msg #pa {
 	cursor: pointer;
 }
 
-div#msg #pa:hover {
-	color: #333;
+div#msg #pa:hover, div#msg #levelup #begin:hover, #choose ul li:hover {
+	color: #666;
 }
 
 div#container {
@@ -148,7 +148,7 @@ div#cdam {
 
 #choose ul {
 	position: absolute;
-	top: 40px;
+	top: 35px;
 	left: 45px;
 }
 
@@ -157,6 +157,10 @@ div#cdam {
 	list-style-type: none;
 	cursor: pointer;
 	margin-left: 10px;
+}
+
+#levelup {
+	display: none;
 }
 
 .u0 {

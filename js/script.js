@@ -32,6 +32,11 @@ var y = 0
 // Number of CPU branches
 var p = 0
 
+// Used for Progressive Leveling
+var pl = 0
+var v = false;
+var x = ["e","m","e","m","h","m","h","m","h","h"]
+
 // Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
 var l;
 
@@ -47,6 +52,11 @@ function reset() {
     e = 0
     y = 0
     p = 0
+}
+
+function resetLevels() {
+    pl = 0
+    v = false
 }
 
 // Translates keycode to letter
@@ -107,6 +117,7 @@ function start() {
 
 // Stops the game, removes all branches from view, and shows the #overlay
 function stop(m) {
+    resetLevels()
     $("body #branch").remove()
     $("#overlay").show()
     $("#msg").show()
@@ -114,13 +125,31 @@ function stop(m) {
     $("#pa").show()
 }
 
+function levelUp(a) {
+    if (a === undefined){
+        pl += 1
+    }
+    $("body #branch").remove()
+    $("#overlay").show()
+    $("#msg").show()
+    $("#levelup").show()
+    $("#levelup span").show().text((pl+1).toString(10))
+}
+
 // Increases User Score by 1
 function uUp() {
     console.log("User Up 1")
     $("#udam").removeClass('u' + y)
     y += 1
+    if ((pl+1) === x.length) {
+        v = false;
+    }
     if (y === 9) {
-        stop("You Win! :)")
+        if (v) {
+            levelUp()
+        } else {
+            stop("You Win! :)")
+        }
     }
     $("#udam").addClass('u' + y)
 }
@@ -152,7 +181,8 @@ function startGame(a) {
     $("#msg").hide()
     $("#pa").hide()
     $("#choose").hide()
-
+    $("#levelup").hide()
+    $("#levelup span").hide()
     // Sets variables to difficulty, 'w' is the dictionary of words, 'o' is the distance between branches, and 'q' is the speed (Lower is faster)
     if (a === "e") {
         w = easyWords;
@@ -169,7 +199,13 @@ function startGame(a) {
         o = -100;
         q = 15
     }
-    start()
+    if (a === "p") {
+        resetLevels()
+        levelUp(1)
+    } else {
+        console.log(a)
+        start()
+    }
 }
 
 $(document).ready(function() {
@@ -217,5 +253,12 @@ $(document).ready(function() {
     });
     $("#hard").click(function() {
         startGame("h");
+    });
+    $("#pro").click(function() {
+        startGame("p");
+        v = true;
+    });
+    $("#begin").click(function() {
+        startGame(x[pl]);
     });
 });
