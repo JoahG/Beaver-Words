@@ -51,12 +51,12 @@ var settings = {
         q = 25;          // Speed (Less is more)
         kr = true;       // Capital letters disabled
     },
-    m: function() { // Medium Mode
+    m: function() {      // Medium Mode
         w = easyWords;
         o = -50;
         q = 20;
     },
-    h: function() { // Hard Mode
+    h: function() {      // Hard Mode
         w = hardWords;
         o = -100;
         q = 15;
