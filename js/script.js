@@ -155,6 +155,7 @@ function levelUp(a) {
     $("#msg").show(); // Show the #msg
     $("#levelup").show(); // Show the #levelup text
     $("#levelup span").show().text((pl+1).toString(10)); // Display the current level in '#levelup span'
+    $("#begin").show();
 }
 
 // Increases User Score by 1
@@ -229,7 +230,16 @@ $(document).ready(function() {
     setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; i = 0;}}, 1);
 
     $(this).keypress(function() { // Document KeyPress function
-        var k = s(event.keyCode ? event.keyCode : event.which); // Key pressed
+        var y = event.keyCode ? event.keyCode : event.which
+        if ((y === 13)&& ($('#begin').css('display') !== "none")) {
+            $("#begin").click()
+            return true;
+        }
+        if ((y === 13)&& ($('#pa').css('display') !== "none")) {
+            $("#pa").click()
+            return true;
+        }
+        var k = s(y); // Key pressed
 
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
 
