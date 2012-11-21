@@ -5,9 +5,9 @@ var b = 0
 var h = 0
 
 // Dictionary of words
-var hardWords = [ 'Aeroplane',  'Aircraft Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact Disc',  'Compass',  'Computer',  'Crystal',  'Data Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet fighter',  'Kaleidoscope',  'Kitchen',  'Leather jacket', "Lackadaisically" ,  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle',  'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',  'Pocket',  'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ]
+var hardWords = [ 'Aeroplane',  'Aircraft Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact Disc',  'Compass',  'Computer',  'Crystal',  'Data Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet fighter',  'Kaleidoscope',  'Kitchen',  'Leather jacket', "Lackadaisically" ,  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle', 'Octopus' , 'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',   'Pocket', 'Platapus' , 'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ]
 
-var easyWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk',  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ]
+var easyWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk', 'Dog' ,  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ]
 
 var w = [];
 
@@ -37,8 +37,31 @@ var pl = 0
 var v = false;
 var x = ["e","m","e","m","h","m","h","m","h","h"]
 
+// Enables lower-case on Easy
+var kr = false
+
 // Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
 var l;
+
+// Settings variable for easy access/change
+var settings = {
+    e: function() {
+        w = easyWords;
+        o = -10;
+        q = 25
+        kr = true
+    },
+    m: function() {
+        w = easyWords;
+        o = -50;
+        q = 20
+    },
+    h: function() {
+        w = hardWords;
+        o = -100;
+        q = 15
+    }
+}
 
 // Used to reset all the variables
 function reset() {
@@ -52,8 +75,10 @@ function reset() {
     e = 0
     y = 0
     p = 0
+    kr = false
 }
 
+// Reset the Levels (For Progressive gameplay)
 function resetLevels() {
     pl = 0
     v = false
@@ -125,10 +150,9 @@ function stop(m) {
     $("#pa").show()
 }
 
+// Displays the "Level up" box
 function levelUp(a) {
-    if (a === undefined){
-        pl += 1
-    }
+    if (a === undefined){ pl += 1 }
     $("body #branch").remove()
     $("#overlay").show()
     $("#msg").show()
@@ -185,19 +209,13 @@ function startGame(a) {
     $("#levelup span").hide()
     // Sets variables to difficulty, 'w' is the dictionary of words, 'o' is the distance between branches, and 'q' is the speed (Lower is faster)
     if (a === "e") {
-        w = easyWords;
-        o = -10;
-        q = 25
+        settings.e()
     }
     if (a === "m") {
-        w = easyWords;
-        o = -50;
-        q = 20
+        settings.m()
     }
     if (a === "h") {
-        w = hardWords;
-        o = -100;
-        q = 15
+        settings.h()
     }
     if (a === "p") {
         resetLevels()
@@ -223,7 +241,7 @@ $(document).ready(function() {
 
         // Current letter's <span>
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10));
-        if (k === l.text()) {
+        if (k === l.text() || (kr && k.toLowerCase() === (l.text().toLowerCase()))) {
             l.css("color","green");
             i += 1
         }
