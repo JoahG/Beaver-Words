@@ -6,10 +6,8 @@ var h = 0;
 
 // Dictionary of words
 var hardWords = [ 'Aeroplane',  'Aircraft Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact Disc',  'Compass',  'Computer',  'Crystal',  'Data Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet fighter',  'Kaleidoscope',  'Kitchen',  'Leather jacket', "Lackadaisically" ,  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle', 'Octopus' , 'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',   'Pocket', 'Platapus' , 'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ];
-
 var easyWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk', 'Dog' ,  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ];
-
-var w = [];
+var w = []; // Current Dictionary
 
 // Word *order* (I realized I had a major problem here)
 var c = [];
@@ -33,11 +31,11 @@ var y = 0;
 var p = 0;
 
 // Used for Progressive Leveling
-var pl = 0;
-var v = false;
-var x = ["e","m","e","m","h","m","h","m","h","h"];
+var pl = 0; // Current Level
+var v = false; // Variable to turn on/off progressive leveling
+var x = ["e","m","e","m","h","m","h","m","h","h"]; // Order of levels (will be passed as parameters to startGame())
 
-// Enables lower-case on Easy
+// Disables Capital Letters
 var kr = false;
 
 // Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
@@ -65,67 +63,66 @@ var settings = {
 
 // Used to reset all the variables
 function reset() {
-    $("#udam").removeClass().addClass('u0');
-    $("#cdam").removeClass().addClass('u0');
-    b = 0;
-    h = 0;
-    c = [];
-    q = 25;
-    o = -50;
-    e = 0;
-    y = 0;
-    p = 0;
-    kr = false;
+    $("#udam").removeClass().addClass('u0'); // Removes classes on User Dam, adds class displaying empty dam
+    $("#cdam").removeClass().addClass('u0'); // Removes classes on CPU Dam, adds class displaying empty dam
+    b = 0; // Sets the number of branches to 0
+    h = 0; // Sets the current branch to 0
+    c = []; // Empties the word order
+    q = 25; // Sets the speed to the default
+    o = -50; // Sets the space to the default
+    e = 0; // Resets frontmost branch
+    y = 0; // Resets User score
+    p = 0; // Resets CPU Scoure
+    kr = false; // Turns Capital letters on (default)
 }
 
 // Reset the Levels (For Progressive gameplay)
 function resetLevels() {
-    pl = 0;
-    v = false;
+    pl = 0; // Resets current level
+    v = false; // Turns off progressive levels
 }
 
 // Translates keycode to letter
 function s(n) {
-   var i;
-   if (typeof n === "string") {
-      if (n.length > 1) {
-         a = [];
+   if (typeof n === "string") {    // If the input is a string...
+      if (n.length > 1) {          // ... And its length is more than 1,
+         a = [];                   // Make an array...
          for (i in n) {
-            a.push(s(n[i]));
+            a.push(s(n[i]));       // And use semi-recursiveness to iterate over all the characters in the string...
          }
-         return a;
+         return a;                 // and return the array
       } else {
-         return n.charCodeAt(0);
+         return n.charCodeAt(0);   // Else, simply return the corresponding charCode
       }
    } else {
-      if (typeof n === "object"){
-         a = [];
+      if (typeof n === "object"){  // If the input is an array (object)
+         a = [];                   // Make an array...
          for (i in n) {
-            a.push(s(n[i]));
+            a.push(s(n[i]));       // And use semi-recursiveness to iterate over all the characters in the string...
          }
-         return a;
+         return a;                 // and return the array
       }
-      return String.fromCharCode(n);
+      return String.fromCharCode(n); // Else, simply return the corresponding character
    }
 }
 
 // Outputs a bunch of spans with the inputted word's letters in them
 function span(w) {
-    a = [];
+    a = []; // Make an array...
     for (i in w){
-        a.push("<span id='"+i+"'>"+w[i]+"</span>");
+        a.push("<span id='"+i+"'>"+w[i]+"</span>");  // Which will include each character of the inputted string in a separate <span>
     }
-    return a.join("");
+    return a.join(""); // Which is joined together into a longer string and returned
 }
 
 // Adds a new branch to the #container
 function newBranch() {
-    c.push(w[Math.floor((Math.random()*w.length))]);
-    $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>");
-    b += 1;
-    z -= 1;
-    $("div#branch.b"+(b-1).toString(10)).css("right", parseInt("-"+($("div#branch.b"+(b-1).toString(10)).css("width").toString(10)), 10));
-    $("div#branch.b"+(b-1).toString(10)).css("top", Math.floor(Math.random()*185) + 130).css("z-index", z);
+    c.push(w[Math.floor((Math.random()*w.length))]); // Add a new random word to the word order list ('c')
+    $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
+    b += 1; // Add a branch to the counter variable
+    z -= 1; // Lower the z-index counter by 1
+    $("div#branch.b"+(b-1).toString(10)).css("right", parseInt("-"+($("div#branch.b"+(b-1).toString(10)).css("width").toString(10)), 10)); // Make sure that the CSS 'right' property is set to the branch's width
+    $("div#branch.b"+(b-1).toString(10)).css("top", Math.floor(Math.random()*185) + 130).css("z-index", z); // Set the z-index of the branch to the 'z' variable, to prevent reverse stacking
 }
 
 // Adds a new branch, and sets it in motion
@@ -142,124 +139,119 @@ function start() {
 
 // Stops the game, removes all branches from view, and shows the #overlay
 function stop(m) {
-    resetLevels();
-    $("body #branch").remove();
-    $("#overlay").show();
-    $("#msg").show();
-    $("#msg span").show().text(m);
-    $("#pa").show();
+    resetLevels(); // Call the resetLevels() variable
+    $("body #branch").remove(); // Remove any branches in the body
+    $("#overlay").show(); // Show the #overlay
+    $("#msg").show(); // Show the #msg
+    $("#msg span").show().text(m); // Show the span in the #msg, and make it say the inputted variable
+    $("#pa").show(); // Show the 'Play Again' button
 }
 
 // Displays the "Level up" box
 function levelUp(a) {
-    if (a === undefined){ pl += 1; }
-    $("body #branch").remove();
-    $("#overlay").show();
-    $("#msg").show();
-    $("#levelup").show();
-    $("#levelup span").show().text((pl+1).toString(10));
+    if (a === undefined){ pl += 1; } // Simple way to bypass increasing the level on the first call (Level 1)
+    $("body #branch").remove(); // Remove all branches
+    $("#overlay").show(); // Show the #overlay
+    $("#msg").show(); // Show the #msg
+    $("#levelup").show(); // Show the #levelup text
+    $("#levelup span").show().text((pl+1).toString(10)); // Display the current level in '#levelup span'
 }
 
 // Increases User Score by 1
 function uUp() {
-    console.log("User Up 1");
-    $("#udam").removeClass('u' + y);
-    y += 1;
-    if ((pl+1) === x.length) {
-        v = false;
+    $("#udam").removeClass(); // Remove any present classes on the User's dam
+    y += 1; // Increase the User's score by 1
+    if ((pl+1) === x.length && v) { // If the User is playing progressive mode, and has reached the last level,
+        v = false; // Turn off progressive mode
     }
-    if (y === 9) {
-        if (v) {
-            levelUp();
+    if (y === 9) { // If the User has completed his dam
+        if (v) { // If the User is playing progressive mode,
+            levelUp(); // Level up
         } else {
-            stop("You Win! :)");
+            stop("You Win! :)"); // Stop and say, "You Win!"
         }
     }
-    $("#udam").addClass('u' + y);
+    $("#udam").addClass('u' + y); // Add the new class to the dam to display the correct picture
 }
 
 // Increases CPU Score by 1
 function cpuUp() {
-    console.log("Computer Up 1");
-    $("#cdam").removeClass('u' + p);
-    p += 1;
-    if (p === 9) {
-        stop("You Lose :(");
+    $("#cdam").removeClass(); // Remove any present classes on the CPU's dam
+    p += 1; // Increase the CPU's score by 1
+    if (p === 9) { // If the CPU has completed its dam
+        stop("You Lose :("); // Stop and say, "You Lose"
     }
-    $("#cdam").addClass('u' + p);
+    $("#cdam").addClass('u' + p); // Add the new class to the CPU's dam
 }
 
 // Shows the "Choose Level" screen
 function showChoose() {
-    $("#overlay").show();
-    $("#msg").show();
-    $("#msg span").hide();
-    $("#pa").hide();
-    $("#choose").show();
+    $("#overlay").show();  // Show the #overlay
+    $("#msg").show();      // Show the #msg
+    $("#msg span").hide(); // Hide the <span> in the #msg
+    $("#pa").hide();       // Hide the "Play Again" button
+    $("#choose").show();   // Show the "Choose Level" screen
 }
 
 // Starts the game
 function startGame(a) {
-    reset();
-    $("#overlay").hide();
-    $("#msg").hide();
-    $("#pa").hide();
-    $("#choose").hide();
-    $("#levelup").hide();
-    $("#levelup span").hide();
+    reset(); // Reset the variables
+    $("#overlay").hide(); // Hide the #overlay
+    $("#msg").hide(); // Hide the #msg
+    $("#pa").hide(); // Hide the "Play Again" button
+    $("#choose").hide(); // Hide the "Choose Level" screen
+    $("#levelup").hide(); // Hide the #levelup screen
+    $("#levelup span").hide(); // Hide the Level on the #levelup screen
     // Sets variables to difficulty, 'w' is the dictionary of words, 'o' is the distance between branches, and 'q' is the speed (Lower is faster)
-    if (a === "e") {
-        settings.e();
+    if (a === "e") { 
+        settings.e(); // If the passed parameter is "e," set the settings to Easy
     }
     if (a === "m") {
-        settings.m();
+        settings.m(); // If the passed parameter is "m," set the settings to Medium
     }
     if (a === "h") {
-        settings.h();
+        settings.h(); // If the passed parameter is "h," set the settings to Hard
     }
     if (a === "p") {
-        resetLevels();
-        levelUp(1);
+        resetLevels(); // If the passed parameter is "p," Reset the levels
+        levelUp(1); // And show the #levelup screen, showing level 1 (the parameter is *not* undefined)
     } else {
-        console.log(a);
-        start();
+        start(); // If it isn't Progressive mode, start the game
     }
 }
 
 $(document).ready(function() {
-    showChoose();
+    showChoose(); // Show the "Choose level" screen
 
-    // Counter for current letter (of current word)
-    var i = 0;
+    var i = 0; // Counter for current letter (of current word)
 
     // When a branch hits 250px right margin, remove it
     setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; i = 0;}}, 1);
 
-    $(this).keypress(function() {
-        // Key pressed
-        var k = s(event.keyCode ? event.keyCode : event.which);
+    $(this).keypress(function() { // Document KeyPress function
+        var k = s(event.keyCode ? event.keyCode : event.which); // Key pressed
 
-        // Current letter's <span>
-        l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10));
-        if (k === l.text() || (kr && k.toLowerCase() === (l.text().toLowerCase()))) {
-            l.css("color","green");
-            i += 1;
+        l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
+
+        if (k === l.text() || (kr && k.toLowerCase() === (l.text().toLowerCase()))) { // If the User typed the correct letter - or Uppercase is disabled, and the user typed the lowercase version of the letter
+            l.css("color","green"); // Set the current letter to green
+            i += 1; // Go to the next letter
         }
-        if (i === c[h].length) {
-            if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) < o) {
-                start();
+        if (i === c[h].length) { // If the User has typed the entire word
+            if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) < o) { // If there isn't a branch going already...
+                start(); // ... Start one
             }
-            $("div#branch.b"+h.toString(10)).remove();
-            uUp();
-            h += 1;
-            i = 0;
-            e += 1;
+            $("div#branch.b"+h.toString(10)).remove(); // Remove the last branch
+            uUp(); // Increase the User's score by 1
+            h += 1; // Change to the next branch as the current one
+            i = 0; // Go back to the first letter of the word
+            e += 1; // Increase the frontmost branch for removal variable by 1
         }
     });
 
     // When you click the "Play Again?" button, it starts the game, hides the #overlay (and #msg), and resets the variables
     $("#pa").click(function() {
-        showChoose();
+        showChoose(); // Show the "Choose Level" screen
     });
 
     // Easy, Medium, and Hard buttons are simple function calls passing the level as the parameter
@@ -272,10 +264,14 @@ $(document).ready(function() {
     $("#hard").click(function() {
         startGame("h");
     });
+
+    // Progressive starts the game with "p" as the parameter, and turns on progressive mode
     $("#pro").click(function() {
         startGame("p");
         v = true;
     });
+
+    // The #begin button is for progressive mode only, and starts the next game in the lineup
     $("#begin").click(function() {
         startGame(x[pl]);
     });
