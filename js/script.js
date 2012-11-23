@@ -238,12 +238,12 @@ $(document).ready(function() {
     $(this).keypress(function() { // Document KeyPress function
         var y = event.keyCode ? event.keyCode : event.which
         if ((y === 13)&& ($('#begin').css('display') !== "none")) {
-            $("#begin").click()
-            return true;
+            $("#begin").click() // If User presses [Enter], and the "begin" button is showing, press the begin button
+            return true; // Exit the .keypress() function
         }
         if ((y === 13)&& ($('#pa').css('display') !== "none")) {
-            $("#pa").click()
-            return true;
+            $("#pa").click() // If User presses [Enter], and the "Play Again" button is showing, press the begin button
+            return true; // Exit the .keypress() function
         }
         var k = s(y); // Key pressed
 
