@@ -5,7 +5,7 @@ var b = 0;
 var h = 0;
 
 // Dictionary of words
-var hardWords = [ 'Aeroplane',  'Aircraft Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact Disc',  'Compass',  'Computer',  'Crystal',  'Data Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet fighter',  'Kaleidoscope',  'Kitchen',  'Leather jacket', "Lackadaisically" ,  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle', 'Octopus' , 'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',   'Pocket', 'Platapus' , 'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ];
+var hardWords = [ 'Aeroplane',  'Aircraft-Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess-Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact-Disc',  'Compass',  'Computer',  'Crystal',  'Data-Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet-fighter',  'Kaleidoscope',  'Kitchen',  'Leather-jacket',  'Lackadaisically',  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle',  'Octopus',  'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',  'Pocket',  'Platapus',  'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space-Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot-Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming-Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis-racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ];
 var easyWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk', 'Dog' ,  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ];
 var w = []; // Current Dictionary
 
@@ -34,6 +34,8 @@ var p = 0;
 var pl = 0; // Current Level
 var v = false; // Variable to turn on/off progressive leveling
 var x = ["e","m","e","m","h","m","h","m","h","h"]; // Order of levels (will be passed as parameters to startGame())
+
+var i = 0; // Counter for current letter (of current word)
 
 // Disables Capital Letters
 var kr = false;
@@ -84,6 +86,7 @@ function resetLevels() {
 
 // Translates keycode to letter
 function s(n) {
+   var i;                          // Localize 'i' variable (So as not to use the global variable)
    if (typeof n === "string") {    // If the input is a string...
       if (n.length > 1) {          // ... And its length is more than 1,
          a = [];                   // Make an array...
@@ -108,6 +111,7 @@ function s(n) {
 
 // Outputs a bunch of spans with the inputted word's letters in them
 function span(w) {
+    var i;  // Localize 'i' variable (So as not to use the global variable)
     a = []; // Make an array...
     for (i in w){
         a.push("<span id='"+i+"'>"+w[i]+"</span>");  // Which will include each character of the inputted string in a separate <span>
@@ -177,12 +181,16 @@ function uUp() {
 
 // Increases CPU Score by 1
 function cpuUp() {
+    $("div#branch.b"+e.toString(10)).remove(); // Remove the current branch
+    e+=1; // Change frontmost branch
     $("#cdam").removeClass(); // Remove any present classes on the CPU's dam
     p += 1; // Increase the CPU's score by 1
     if (p === 9) { // If the CPU has completed its dam
         stop("You Lose :("); // Stop and say, "You Lose"
     }
     $("#cdam").addClass('u' + p); // Add the new class to the CPU's dam
+    h += 1; // Change current branch
+    i = 0; // Reset current letter (Of current word)
 }
 
 // Shows the "Choose Level" screen
@@ -224,10 +232,8 @@ function startGame(a) {
 $(document).ready(function() {
     showChoose(); // Show the "Choose level" screen
 
-    var i = 0; // Counter for current letter (of current word)
-
     // When a branch hits 250px right margin, remove it
-    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {$("div#branch.b"+e.toString(10)).remove(); e+=1; cpuUp(); h += 1; i = 0;}}, 1);
+    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {cpuUp();}}, 1);
 
     $(this).keypress(function() { // Document KeyPress function
         var y = event.keyCode ? event.keyCode : event.which
@@ -240,6 +246,10 @@ $(document).ready(function() {
             return true;
         }
         var k = s(y); // Key pressed
+
+        if (k === " ") { 
+            cpuUp(); // If User presses "[space]", forfeit branch to CPU
+        }
 
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
 
