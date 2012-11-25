@@ -250,6 +250,22 @@ $(document).ready(function() {
         if (k === " ") { 
             cpuUp(); // If User presses "[space]", forfeit branch to CPU
         }
+        // If the "Choose Level" dialogue is showing, and the user presses "e", "h", "m", or "p", respond accordingly
+        if (k === "e" && ($('#choose').css('display') !== "none")) {
+            $("#easy").click()
+        }
+        if (k === "m" && ($('#choose').css('display') !== "none")) {
+            $("#med").click()
+            return true;
+        }
+        if (k === "h" && ($('#choose').css('display') !== "none")) {
+            $("#hard").click()
+            return true;
+        }
+        if (k === "p" && ($('#choose').css('display') !== "none")) {
+            $("#pro").click()
+            return true;
+        }
 
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
 
