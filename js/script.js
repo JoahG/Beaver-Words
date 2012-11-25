@@ -144,14 +144,9 @@ function newBranch() {
 
 // Adds a new branch, and sets it in motion
 function start() {
-    // Create new branch
-    newBranch();
-
-    // Set the branch in motion, going one pixel every 'q' milliseconds
-    $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q*432, 'linear');
-
-    // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
-    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start();}}, 1);
+    newBranch(); // Create new branch
+    $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q*432, 'linear'); // Set the branch in motion, going one pixel every 'q' milliseconds
+    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start();}}, 1); // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
 }
 
 // Stops the game, removes all branches from view, and shows the #overlay
