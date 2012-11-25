@@ -53,7 +53,7 @@ var settings = {
     },
     m: function() {      // Medium Mode
         w = easyWords;
-        o = -50;
+        o = -70;
         q = 20;
     },
     h: function() {      // Hard Mode
