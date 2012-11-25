@@ -146,6 +146,7 @@ function stop(m) {
     resetLevels(); // Call the resetLevels() variable
     $("body #branch").remove(); // Remove any branches in the body
     $("#overlay").show(); // Show the #overlay
+    $("#keyb").show();     // Show the keyboard shortcuts button
     $("#msg").show(); // Show the #msg
     $("#msg span").show().text(m); // Show the span in the #msg, and make it say the inputted variable
     $("#pa").show(); // Show the 'Play Again' button
@@ -156,6 +157,7 @@ function levelUp(a) {
     if (a === undefined){ pl += 1; } // Simple way to bypass increasing the level on the first call (Level 1)
     $("body #branch").remove(); // Remove all branches
     $("#overlay").show(); // Show the #overlay
+    $("#keyb").show();     // Show the keyboard shortcuts button
     $("#msg").show(); // Show the #msg
     $("#levelup").show(); // Show the #levelup text
     $("#levelup span").show().text((pl+1).toString(10)); // Display the current level in '#levelup span'
@@ -196,6 +198,7 @@ function cpuUp() {
 // Shows the "Choose Level" screen
 function showChoose() {
     $("#overlay").show();  // Show the #overlay
+    $("#keyb").show();     // Show the keyboard shortcuts button
     $("#msg").show();      // Show the #msg
     $("#msg span").hide(); // Hide the <span> in the #msg
     $("#pa").hide();       // Hide the "Play Again" button
@@ -206,11 +209,13 @@ function showChoose() {
 function startGame(a) {
     reset(); // Reset the variables
     $("#overlay").hide(); // Hide the #overlay
+    $("#keyb").hide(); // Hide the keyboard shortcuts button
     $("#msg").hide(); // Hide the #msg
     $("#pa").hide(); // Hide the "Play Again" button
     $("#choose").hide(); // Hide the "Choose Level" screen
     $("#levelup").hide(); // Hide the #levelup screen
     $("#levelup span").hide(); // Hide the Level on the #levelup screen
+    $("#begin").hide() // Hide the #begin button
     // Sets variables to difficulty, 'w' is the dictionary of words, 'o' is the distance between branches, and 'q' is the speed (Lower is faster)
     if (a === "e") { 
         settings.e(); // If the passed parameter is "e," set the settings to Easy
@@ -246,13 +251,13 @@ $(document).ready(function() {
             return true; // Exit the .keypress() function
         }
         var k = s(y); // Key pressed
-
         if (k === " ") { 
             cpuUp(); // If User presses "[space]", forfeit branch to CPU
         }
         // If the "Choose Level" dialogue is showing, and the user presses "e", "h", "m", or "p", respond accordingly
         if (k === "e" && ($('#choose').css('display') !== "none")) {
             $("#easy").click()
+            return true;
         }
         if (k === "m" && ($('#choose').css('display') !== "none")) {
             $("#med").click()
@@ -310,5 +315,11 @@ $(document).ready(function() {
     // The #begin button is for progressive mode only, and starts the next game in the lineup
     $("#begin").click(function() {
         startGame(x[pl]);
+    });
+    $("#kclose").click(function() {
+        $("#keyb").click()
+    });
+    $("#keyb").click(function(){
+        $("#keyboard").toggle()
     });
 });

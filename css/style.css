@@ -149,7 +149,7 @@ div#cdam {
 #choose ul {
 	position: absolute;
 	top: 35px;
-	left: 45px;
+	left: 60px;
 }
 
 #choose ul li {
@@ -157,6 +157,60 @@ div#cdam {
 	list-style-type: none;
 	cursor: pointer;
 	margin-left: 10px;
+	font-size: 17px;
+}
+
+#keyb {
+	display: none;
+	position: absolute;
+	z-index: 300000;
+	right: 10;
+	top: 40;
+	width: 50px;
+	height: 26px;
+	background: url(../img/keyb.png);
+	cursor: pointer;
+}
+
+#keyboard {
+	display: none;
+	position: absolute;
+	z-index: 300000;
+	width: 280px;
+	height: 260px;
+	margin: 75px 150px;
+	padding: 10px;
+	background-color: white;
+}
+
+#kclose {
+	background: url(../img/rem.png);
+	height: 26px;
+	width: 26px;
+	position: absolute;
+	z-index: 1000000000;
+	right: 5;
+	top: 5;
+	cursor: pointer;
+}
+
+.q {
+	position: relative;
+	left: 0;
+	float: left;
+	font-size: 15px;
+}
+
+.k {
+	position: relative;
+	right: 0;
+	float: right;
+	font-size: 15px;
+	font-family: "monaco";
+}
+
+#t {
+	margin-bottom: 5px;
 }
 
 #levelup {
