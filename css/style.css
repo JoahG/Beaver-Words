@@ -130,8 +130,11 @@ div#cpubeaver {
 div#udam {
 	position: absolute;
 	z-index: 0;
-	height: 69px;
+	-webkit-mask-box-image: url(../img/damFilled.png);
+	background-image: url(../img/dam.png);
 	width: 80px;
+	height: 77px;
+	position: absolute;
 	left: 110;
 	top: 110;
 }
@@ -139,10 +142,20 @@ div#udam {
 div#cdam {
 	position: absolute;
 	z-index: 0;
-	height: 69px;
+	-webkit-mask-box-image: url(../img/damFilled.png);
+	background-image: url(../img/dam.png);
 	width: 80px;
+	height: 77px;
+	position: absolute;
 	left: 30;
 	bottom: 110;
+}
+
+.filler {
+	width: 100%;
+	background-color: black;
+	position: absolute;
+	bottom: 0;
 }
 
 #choose {
@@ -219,44 +232,4 @@ div#cdam {
 
 #levelup {
 	display: none;
-}
-
-.u0 {
-	background: url(../img/dam/u0.png);
-}
-
-.u1 {
-	background: url(../img/dam/u1.png);
-}
-
-.u2 {
-	background: url(../img/dam/u2.png);
-}
-
-.u3 {
-	background: url(../img/dam/u3.png);
-}
-
-.u4 {
-	background: url(../img/dam/u4.png);
-}
-
-.u5 {
-	background: url(../img/dam/u5.png);
-}
-
-.u6 {
-	background: url(../img/dam/u6.png);
-}
-
-.u7 {
-	background: url(../img/dam/u7.png);
-}
-
-.u8 {
-	background: url(../img/dam/u8.png);
-}
-
-.u9 {
-	background: url(../img/dam/u9.png);
 }

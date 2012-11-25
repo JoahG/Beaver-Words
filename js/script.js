@@ -50,23 +50,25 @@ var settings = {
         o = -10;         // Space in between branches
         q = 25;          // Speed (Less is more) - ms/px
         kr = true;       // Capital letters disabled
+        scoreLimit = 8;
     },
     m: function() {      // Medium Mode
         w = easyWords;
         o = -70;
         q = 20;
+        scoreLimit = 12;
     },
     h: function() {      // Hard Mode
         w = hardWords;
         o = -100;
         q = 15;
+        scoreLimit = 15;
     }
 };
 
 // Used to reset all the variables
 function reset() {
-    $("#udam").removeClass().addClass('u0'); // Removes classes on User Dam, adds class displaying empty dam
-    $("#cdam").removeClass().addClass('u0'); // Removes classes on CPU Dam, adds class displaying empty dam
+    $(".filler").css("height", 0)
     b = 0; // Sets the number of branches to 0
     h = 0; // Sets the current branch to 0
     c = []; // Empties the word order
@@ -177,7 +179,6 @@ function levelUp(a) {
 
 // Increases User Score by 1
 function uUp() {
-    $("#udam").removeClass(); // Remove any present classes on the User's dam
     y += 1; // Increase the User's score by 1
     if ((pl+1) === x.length && v) { // If the User is playing progressive mode, and has reached the last level,
         v = false; // Turn off progressive mode
@@ -189,19 +190,18 @@ function uUp() {
             stop("You Win! :)"); // Stop and say, "You Win!"
         }
     }
-    $("#udam").addClass('u' + y); // Add the new class to the dam to display the correct picture
+    $("#uFiller").css("height", y*(parseInt($("#udam").css("height"), 10)/scoreLimit))
 }
 
 // Increases CPU Score by 1
 function cpuUp() {
     $("div#branch.b"+e.toString(10)).remove(); // Remove the current branch
     e+=1; // Change frontmost branch
-    $("#cdam").removeClass(); // Remove any present classes on the CPU's dam
     p += 1; // Increase the CPU's score by 1
     if (p === scoreLimit) { // If the CPU has completed its dam
         stop("You Lose :("); // Stop and say, "You Lose"
     }
-    $("#cdam").addClass('u' + p); // Add the new class to the CPU's dam
+    $("#cpuFiller").css("height", p*(parseInt($("#cdam").css("height"), 10)/scoreLimit))
     h += 1; // Change current branch
     i = 0; // Reset current letter (Of current word)
 }
