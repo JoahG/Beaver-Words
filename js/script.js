@@ -1,3 +1,6 @@
+var branchHeight = 14;
+var scoreLimit = 9;
+
 // Number of branches
 var b = 0;
 
@@ -39,9 +42,6 @@ var i = 0; // Counter for current letter (of current word)
 
 // Disables Capital Letters
 var kr = false;
-
-var branchHeight = 14;
-var scoreLimit = 9;
 
 // Settings variable for easy access/change
 var settings = {
