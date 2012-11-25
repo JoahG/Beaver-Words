@@ -40,8 +40,8 @@ var i = 0; // Counter for current letter (of current word)
 // Disables Capital Letters
 var kr = false;
 
-// Testing variable (when inputted to the Chrome console, it should output the HTML for the letter it is waiting for)
-var l;
+var branchHeight = 14;
+var scoreLimit = 9;
 
 // Settings variable for easy access/change
 var settings = {
@@ -76,6 +76,13 @@ function reset() {
     y = 0; // Resets User score
     p = 0; // Resets CPU Scoure
     kr = false; // Turns Capital letters on (default)
+    t = [];
+    te = [];
+    hei = 130;
+    while (hei <= 315) {
+        t.push(hei);
+        hei += branchHeight;
+    }
 }
 
 // Reset the Levels (For Progressive gameplay)
@@ -125,8 +132,12 @@ function newBranch() {
     $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
     b += 1; // Add a branch to the counter variable
     z -= 1; // Lower the z-index counter by 1
+    if (t.length === 0){t = te; te = [];}
+    var top = t[Math.floor(Math.random()*t.length)]
+    te.push(top)
+    t.splice(t.indexOf(top), 1)
     $("div#branch.b"+(b-1).toString(10)).css("right", parseInt("-"+($("div#branch.b"+(b-1).toString(10)).css("width").toString(10)), 10)); // Make sure that the CSS 'right' property is set to the branch's width
-    $("div#branch.b"+(b-1).toString(10)).css("top", Math.floor(Math.random()*185) + 130).css("z-index", z); // Set the z-index of the branch to the 'z' variable, to prevent reverse stacking
+    $("div#branch.b"+(b-1).toString(10)).css("top", top ).css("z-index", z); // Set the z-index of the branch to the 'z' variable, to prevent reverse stacking
 }
 
 // Adds a new branch, and sets it in motion
@@ -171,7 +182,7 @@ function uUp() {
     if ((pl+1) === x.length && v) { // If the User is playing progressive mode, and has reached the last level,
         v = false; // Turn off progressive mode
     }
-    if (y === 9) { // If the User has completed his dam
+    if (y === scoreLimit) { // If the User has completed his dam
         if (v) { // If the User is playing progressive mode,
             levelUp(); // Level up
         } else {
@@ -187,7 +198,7 @@ function cpuUp() {
     e+=1; // Change frontmost branch
     $("#cdam").removeClass(); // Remove any present classes on the CPU's dam
     p += 1; // Increase the CPU's score by 1
-    if (p === 9) { // If the CPU has completed its dam
+    if (p === scoreLimit) { // If the CPU has completed its dam
         stop("You Lose :("); // Stop and say, "You Lose"
     }
     $("#cdam").addClass('u' + p); // Add the new class to the CPU's dam
