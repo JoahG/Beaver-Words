@@ -148,6 +148,13 @@ div#river {
 	background-color: #00CED1;
 }
 
+div#depthLine {
+	z-index: -1;
+	height: 100%;
+	width: 225px;
+	border-right: 1px dashed black;
+}
+
 div#branch {
 	color: black;
 	font-weight: bolder;
