@@ -36,7 +36,8 @@ var p = 0;
 // Used for Progressive Leveling
 var pl = 0; // Current Level
 var v = false; // Variable to turn on/off progressive leveling
-var x = ["e","m","e","m","h","m","h","m","h","h"]; // Order of levels (will be passed as parameters to startGame())
+var x = ["e","+"]; // Order of levels (will be passed as parameters to startGame())
+var inf = false
 
 var i = 0; // Counter for current letter (of current word)
 
@@ -63,6 +64,19 @@ var settings = {
         o = -100;
         q = 15;
         scoreLimit = 15;
+    },
+    plus: function() {
+        if (pl < 6) {
+            w = easyWords;
+        } else {
+            w = hardWords;
+        }
+        o -= 5;
+        scoreLimit += 1
+        if (q > 18){
+            q -= 2;
+        }
+        inf = true;
     }
 };
 
@@ -72,8 +86,6 @@ function reset() {
     b = 0; // Sets the number of branches to 0
     h = 0; // Sets the current branch to 0
     c = []; // Empties the word order
-    q = 25; // Sets the speed to the default
-    o = -50; // Sets the space to the default
     e = 0; // Resets frontmost branch
     y = 0; // Resets User score
     p = 0; // Resets CPU Scoure
@@ -176,7 +188,7 @@ function levelUp(a) {
 function uUp() {
     y += 1; // Increase the User's score by 1
     if ((pl+1) === x.length && v) { // If the User is playing progressive mode, and has reached the last level,
-        v = false; // Turn off progressive mode
+        x.push("+"); // Turn off progressive mode
     }
     if (y === scoreLimit) { // If the User has completed his dam
         if (v) { // If the User is playing progressive mode,
@@ -232,6 +244,9 @@ function startGame(a) {
     if (a === "h") {
         settings.h(); // If the passed parameter is "h," set the settings to Hard
     }
+    if (a === "+") {
+        settings.plus(); // If the passed parameter is "h," set the settings to Hard
+    }
     if (a === "p") {
         resetLevels(); // If the passed parameter is "p," Reset the levels
         levelUp(1); // And show the #levelup screen, showing level 1 (the parameter is *not* undefined)
@@ -278,9 +293,10 @@ $(document).ready(function() {
             return true;
         }
 
+
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
 
-        if (k === l.text() || (kr && k.toLowerCase() === (l.text().toLowerCase()))) { // If the User typed the correct letter - or Uppercase is disabled, and the user typed the lowercase version of the letter
+        if (k === l.text() || (!v && kr && k.toLowerCase() === (l.text().toLowerCase()))) { // If the User typed the correct letter - or Uppercase is disabled, and the user typed the lowercase version of the letter
             l.css("color","green"); // Set the current letter to green
             i += 1; // Go to the next letter
         }
