@@ -1,4 +1,4 @@
-var branchHeight = 31;
+var branchHeight = 51;
 var scoreLimit = 9;
 
 // Number of branches
@@ -93,7 +93,7 @@ function reset() {
     t = [];
     te = [];
     hei = 130;
-    while (hei <= 284) {
+    while (hei <= 282) {
         t.push(hei);
         hei += branchHeight;
     }
@@ -154,10 +154,21 @@ function newBranch() {
     $("div#branch.b"+(b-1).toString(10)).css("top", top ).css("z-index", z); // Set the z-index of the branch to the 'z' variable, to prevent reverse stacking
 }
 
+function glowBranch() {
+    var cb = $("#branch.b"+h.toString(10));
+    if (cb.hasClass("br0")){
+        cb.removeClass("br0").addClass("br0glow")
+    } else if (cb.hasClass("br1")){
+        cb.removeClass("br1").addClass("br1glow")
+    } else if (cb.hasClass("br2")){
+        cb.removeClass("br2").addClass("br2glow")
+    }
+}
+
 // Adds a new branch, and sets it in motion
 function start() {
     newBranch(); // Create new branch
-    $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
+    glowBranch();
     $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q*432, 'linear'); // Set the branch in motion, going one pixel every 'q' milliseconds
     a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start();}}, 1); // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
 }
@@ -212,7 +223,7 @@ function cpuUp() {
     $("#cpuFiller").css("height", p*(parseInt($("#cdam").css("height"), 10)/scoreLimit))
     h += 1; // Change current branch
     i = 0; // Reset current letter (Of current word)
-    $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
+    glowBranch();
 }
 
 // Shows the "Choose Level" screen
@@ -276,7 +287,7 @@ $(document).ready(function() {
         var k = s(y); // Key pressed
         if (k === " ") { 
             cpuUp(); // If User presses "[space]", forfeit branch to CPU
-            $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
+            glowBranch();
         }
         // If the "Choose Level" dialogue is showing, and the user presses "e", "h", "m", or "p", respond accordingly
         if (k === "e" && ($('#choose').css('display') !== "none")) {
@@ -315,7 +326,7 @@ $(document).ready(function() {
             h += 1; // Change to the next branch as the current one
             i = 0; // Go back to the first letter of the word
             e += 1; // Increase the frontmost branch for removal variable by 1
-            $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
+            glowBranch();
         }
     });
 
