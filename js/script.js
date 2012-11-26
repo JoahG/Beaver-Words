@@ -1,4 +1,4 @@
-var branchHeight = 14;
+var branchHeight = 31;
 var scoreLimit = 9;
 
 // Number of branches
@@ -143,7 +143,7 @@ function span(w) {
 // Adds a new branch to the #container
 function newBranch() {
     c.push(w[Math.floor((Math.random()*w.length))]); // Add a new random word to the word order list ('c')
-    $("#container").append("<div id='branch' class='b"+b.toString(10)+"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
+    $("#container").append("<div id='branch' class='b"+b.toString(10)+" br"+ Math.floor((Math.random()*2)) +"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
     b += 1; // Add a branch to the counter variable
     z -= 1; // Lower the z-index counter by 1
     if (t.length === 0){t = te; te = [];}
