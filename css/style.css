@@ -175,7 +175,7 @@ div#ubeaver {
 	position: absolute;
 	z-index: 0;
 	top: 60;
-	left: 160;
+	left: 250;
 }
 
 div#cpubeaver {
@@ -196,7 +196,7 @@ div#udam {
 	width: 80px;
 	height: 80px;
 	position: absolute;
-	left: 70;
+	left: 160;
 	top: 40;
 }
 
