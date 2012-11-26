@@ -92,7 +92,7 @@ function reset() {
     kr = false; // Turns Capital letters on (default)
     t = [];
     te = [];
-    hei = 130;
+    hei = 80;
     while (hei <= 282) {
         t.push(hei);
         hei += branchHeight;
