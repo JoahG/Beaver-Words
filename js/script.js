@@ -48,7 +48,7 @@ var kr = false;
 var settings = {
     e: function() {      // Easy Mode
         w = easyWords;   // Dictionary to use
-        o = -10;         // Space in between branches
+        o = -40;         // Space in between branches
         q = 25;          // Speed (Less is more) - ms/px
         kr = true;       // Capital letters disabled
         scoreLimit = 8;
@@ -93,7 +93,7 @@ function reset() {
     t = [];
     te = [];
     hei = 130;
-    while (hei <= 315) {
+    while (hei <= 284) {
         t.push(hei);
         hei += branchHeight;
     }
@@ -143,7 +143,7 @@ function span(w) {
 // Adds a new branch to the #container
 function newBranch() {
     c.push(w[Math.floor((Math.random()*w.length))]); // Add a new random word to the word order list ('c')
-    $("#container").append("<div id='branch' class='b"+b.toString(10)+" br"+ Math.floor((Math.random()*2)) +"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
+    $("#container").append("<div id='branch' class='b"+b.toString(10)+" br"+ Math.floor((Math.random()*3)) +"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
     b += 1; // Add a branch to the counter variable
     z -= 1; // Lower the z-index counter by 1
     if (t.length === 0){t = te; te = [];}
@@ -157,6 +157,7 @@ function newBranch() {
 // Adds a new branch, and sets it in motion
 function start() {
     newBranch(); // Create new branch
+    $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
     $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q*432, 'linear'); // Set the branch in motion, going one pixel every 'q' milliseconds
     a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start();}}, 1); // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
 }
@@ -211,6 +212,7 @@ function cpuUp() {
     $("#cpuFiller").css("height", p*(parseInt($("#cdam").css("height"), 10)/scoreLimit))
     h += 1; // Change current branch
     i = 0; // Reset current letter (Of current word)
+    $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
 }
 
 // Shows the "Choose Level" screen
@@ -274,6 +276,7 @@ $(document).ready(function() {
         var k = s(y); // Key pressed
         if (k === " ") { 
             cpuUp(); // If User presses "[space]", forfeit branch to CPU
+            $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
         }
         // If the "Choose Level" dialogue is showing, and the user presses "e", "h", "m", or "p", respond accordingly
         if (k === "e" && ($('#choose').css('display') !== "none")) {
@@ -293,6 +296,9 @@ $(document).ready(function() {
             return true;
         }
 
+        if (k === "k" && ($('#overlay').css('display') !== "none")) {
+            $("#keyb").click()
+        }
 
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
 
@@ -309,6 +315,7 @@ $(document).ready(function() {
             h += 1; // Change to the next branch as the current one
             i = 0; // Go back to the first letter of the word
             e += 1; // Increase the frontmost branch for removal variable by 1
+            $("div#branch.b"+h.toString(10)).css("color", "#ff0000")
         }
     });
 
