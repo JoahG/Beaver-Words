@@ -285,7 +285,7 @@ $(document).ready(function() {
             return true; // Exit the .keypress() function
         }
         var k = s(y); // Key pressed
-        if (k === " ") { 
+        if (k === " " && ($('#overlay').css('display') === "none")) { 
             cpuUp(); // If User presses "[space]", forfeit branch to CPU
             glowBranch();
         }
