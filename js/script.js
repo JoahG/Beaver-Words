@@ -41,6 +41,9 @@ var inf = false
 
 var i = 0; // Counter for current letter (of current word)
 
+var te;
+var t;
+
 // Disables Capital Letters
 var kr = false;
 
@@ -272,7 +275,7 @@ $(document).ready(function() {
     showChoose(); // Show the "Choose level" screen
 
     // When a branch hits 250px right margin, remove it
-    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {cpuUp();}}, 1);
+    setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {cpuUp();} if ($("body #branch").length === 0 && $('#overlay').css('display') === "none"){start()}}, 1);
 
     $(this).keypress(function() { // Document KeyPress function
         var y = event.keyCode ? event.keyCode : event.which

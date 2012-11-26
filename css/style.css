@@ -109,12 +109,12 @@ footer {
 	padding-top: 10px;
 }
 
-footer a {
+a {
 	color: white;
 	text-decoration: none;
 }
 
-footer a:hover {
+a:hover {
 	color: #999;
 }
 
