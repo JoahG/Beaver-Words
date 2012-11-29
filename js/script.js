@@ -280,9 +280,13 @@ $(document).ready(function() {
 
     // When a branch hits 250px right margin, remove it
     setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {cpuUp();} if ($("body #branch").length === 0 && $('#overlay').css('display') === "none"){start()}}, 1);
-
+    $(this).keydown(function(){$(document).keypress()});
+    $(this).keyup(function(){$(document).keypress()});
     $(this).keypress(function() { // Document KeyPress function
         var y = event.keyCode ? event.keyCode : event.which
+        if (y === 8){
+            event.preventDefault()
+        }
         if ((y === 13)&& ($('#begin').css('display') !== "none")) {
             $("#begin").click() // If User presses [Enter], and the "begin" button is showing, press the begin button
             return true; // Exit the .keypress() function
