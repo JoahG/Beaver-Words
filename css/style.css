@@ -256,8 +256,8 @@ div#cdam {
 	position: absolute;
 	z-index: 300000;
 	width: 280px;
-	height: 260px;
-	margin: 65px 150px;
+	height: 200px;
+	margin: 95px 150px;
 	padding: 10px;
 	background-color: white;
 }
