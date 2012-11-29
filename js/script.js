@@ -230,7 +230,6 @@ function uUp() {
 // Increases CPU Score by 1
 function cpuUp() {
     $("div#branch.b"+e.toString(10)).remove(); // Remove the current branch
-    console.log("called")
     e+=1; // Change frontmost branch
     p += 1; // Increase the CPU's score by 1
     if (p === scoreLimit) { // If the CPU has completed its dam
