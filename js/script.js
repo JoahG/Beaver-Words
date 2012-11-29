@@ -35,9 +35,9 @@ var p = 0;
 
 // Used for Progressive Leveling
 var pl = 0; // Current Level
-var v = false; // Variable to turn on/off progressive leveling
-var x = ["e","+"]; // Order of levels (will be passed as parameters to startGame())
-var inf = false
+var plo = 0;
+var v = true; // Variable to turn on/off progressive leveling
+var x; // Order of levels (will be passed as parameters to startGame())
 
 var i = 0; // Counter for current letter (of current word)
 
@@ -49,37 +49,27 @@ var kr = false;
 
 // Settings variable for easy access/change
 var settings = {
-    e: function() {      // Easy Mode
-        w = easyWords;   // Dictionary to use
-        o = -40;         // Space in between branches
-        q = 25;          // Speed (Less is more) - ms/px
-        kr = true;       // Capital letters disabled
+    e: function() {
+        w = easyWords;
+        o = [-40,-40,-40];
+        q = [25,25,25];
+        kr = true;
         scoreLimit = 8;
+        x = "e";
     },
     m: function() {      // Medium Mode
         w = easyWords;
-        o = -70;
-        q = 20;
+        o = [-70];
+        q = [20];
         scoreLimit = 12;
+        x = "m";
     },
     h: function() {      // Hard Mode
         w = hardWords;
-        o = -100;
-        q = 15;
+        o = [-100];
+        q = [15];
         scoreLimit = 15;
-    },
-    plus: function() {
-        if (pl < 6) {
-            w = easyWords;
-        } else {
-            w = hardWords;
-        }
-        o -= 5;
-        scoreLimit += 1
-        if (q > 18){
-            q -= 2;
-        }
-        inf = true;
+        x = "h";
     }
 };
 
@@ -170,15 +160,23 @@ function glowBranch() {
 
 // Adds a new branch, and sets it in motion
 function start() {
+    $("#overlay").hide(); // Hide the #overlay
+    $("#keyb").hide(); // Hide the keyboard shortcuts button
+    $("#msg").hide(); // Hide the #msg
+    $("#pa").hide(); // Hide the "Play Again" button
+    $("#choose").hide(); // Hide the "Choose Level" screen
+    $("#levelup").hide(); // Hide the #levelup screen
+    $("#levelup span").hide(); // Hide the Level on the #levelup screen
+    $("#begin").hide() // Hide the #begin button
     newBranch(); // Create new branch
     glowBranch();
-    $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q*432, 'linear'); // Set the branch in motion, going one pixel every 'q' milliseconds
-    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o) {start();}}, 1); // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
+    $("div#branch.b"+(b-1).toString(10)).animate({right:"250"}, q[plo]*432, 'linear'); // Set the branch in motion, going one pixel every 'q' milliseconds
+    a = setInterval(function() {if (parseInt($("div#branch.b"+(b-1).toString(10)).css("right"),10) === o[plo]) {start();}}, 1); // Check every millisecond to see if it needs to add another branch (last branch has reached 20px left margin)
 }
 
 // Stops the game, removes all branches from view, and shows the #overlay
 function stop(m) {
-    resetLevels(); // Call the resetLevels() variable
+    resetLevels(); // Call the resetLevels() function
     $("body #branch").remove(); // Remove any branches in the body
     $("#overlay").show(); // Show the #overlay
     $("#keyb").show();     // Show the keyboard shortcuts button
@@ -189,7 +187,21 @@ function stop(m) {
 
 // Displays the "Level up" box
 function levelUp(a) {
-    if (a === undefined){ pl += 1; } // Simple way to bypass increasing the level on the first call (Level 1)
+    if (a === undefined){
+        plo += 1;
+        if (plo === o.length){
+            plo = 0;
+            if (x === "e") {
+                settings.m()
+            } else if (x === "m"){
+                settings.h()
+            } else if (x === "h"){
+                stop("You Win :)")
+                return true
+            }
+        }
+        pl += 1;
+    } // Simple way to bypass increasing the level on the first call (Level 1)
     $("body #branch").remove(); // Remove all branches
     $("#overlay").show(); // Show the #overlay
     $("#keyb").show();     // Show the keyboard shortcuts button
@@ -202,15 +214,8 @@ function levelUp(a) {
 // Increases User Score by 1
 function uUp() {
     y += 1; // Increase the User's score by 1
-    if ((pl+1) === x.length && v) { // If the User is playing progressive mode, and has reached the last level,
-        x.push("+"); // Turn off progressive mode
-    }
     if (y === scoreLimit) { // If the User has completed his dam
-        if (v) { // If the User is playing progressive mode,
-            levelUp(); // Level up
-        } else {
-            stop("You Win! :)"); // Stop and say, "You Win!"
-        }
+        levelUp()
     }
     $("#uFiller").css("height", y*(parseInt($("#udam").css("height"), 10)/scoreLimit))
 }
@@ -218,6 +223,7 @@ function uUp() {
 // Increases CPU Score by 1
 function cpuUp() {
     $("div#branch.b"+e.toString(10)).remove(); // Remove the current branch
+    console.log("called")
     e+=1; // Change frontmost branch
     p += 1; // Increase the CPU's score by 1
     if (p === scoreLimit) { // If the CPU has completed its dam
@@ -260,15 +266,7 @@ function startGame(a) {
     if (a === "h") {
         settings.h(); // If the passed parameter is "h," set the settings to Hard
     }
-    if (a === "+") {
-        settings.plus(); // If the passed parameter is "h," set the settings to Hard
-    }
-    if (a === "p") {
-        resetLevels(); // If the passed parameter is "p," Reset the levels
-        levelUp(1); // And show the #levelup screen, showing level 1 (the parameter is *not* undefined)
-    } else {
-        start(); // If it isn't Progressive mode, start the game
-    }
+    levelUp(1);
 }
 
 $(document).ready(function() {
@@ -305,10 +303,6 @@ $(document).ready(function() {
             $("#hard").click()
             return true;
         }
-        if (k === "p" && ($('#choose').css('display') !== "none")) {
-            $("#pro").click()
-            return true;
-        }
 
         if (k === "k" && ($('#overlay').css('display') !== "none")) {
             $("#keyb").click()
@@ -321,7 +315,7 @@ $(document).ready(function() {
             i += 1; // Go to the next letter
         }
         if (i === c[h].length) { // If the User has typed the entire word
-            if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) < o) { // If there isn't a branch going already...
+            if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) < o[plo]) { // If there isn't a branch going already...
                 start(); // ... Start one
             }
             $("div#branch.b"+h.toString(10)).remove(); // Remove the last branch
@@ -349,15 +343,10 @@ $(document).ready(function() {
         startGame("h");
     });
 
-    // Progressive starts the game with "p" as the parameter, and turns on progressive mode
-    $("#pro").click(function() {
-        startGame("p");
-        v = true;
-    });
-
     // The #begin button is for progressive mode only, and starts the next game in the lineup
     $("#begin").click(function() {
-        startGame(x[pl]);
+        reset();
+        start();
     });
     $("#kclose").click(function() {
         $("#keyb").click()
