@@ -227,8 +227,8 @@ div#cdam {
 
 #choose ul {
 	position: absolute;
-	top: 35px;
-	left: 60px;
+	top: 45px;
+	left: 58px;
 }
 
 #choose ul li {
@@ -236,7 +236,7 @@ div#cdam {
 	list-style-type: none;
 	cursor: pointer;
 	margin-left: 10px;
-	font-size: 17px;
+	font-size: 18px;
 }
 
 #keyb {

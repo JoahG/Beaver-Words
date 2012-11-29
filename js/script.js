@@ -49,29 +49,35 @@ var kr = false;
 
 // Settings variable for easy access/change
 var settings = {
-    e: function() {
+    e: function() {      // Easy Mode - 10 Levels
         w = easyWords;
-        o = [-40,-40,-40];
-        q = [25,25,25];
+        o = [-40,-43,-46,-49,-52,-55,-58,-61,-64,-67];
+        q = [25,25,24,24,23,23,22,22,21,21];
         kr = true;
         scoreLimit = 8;
         x = "e";
     },
-    m: function() {      // Medium Mode
+    m: function() {      // Medium Mode - 10 Levels
         w = easyWords;
-        o = [-70];
-        q = [20];
+        o = [-70,-73,-76,-79,-82,-85,-88,-91,-94,-97];
+        q = [20,20,19,19,18,18,17,17,16,16];
         scoreLimit = 12;
         x = "m";
     },
-    h: function() {      // Hard Mode
+    h: function() {      // Hard Mode - 15 Levels
         w = hardWords;
-        o = [-100];
-        q = [15];
+        o = [-100,-101,-102,-103,-104,-105,-106,-107,-108,-109,-110,-111,-112,-113,-114];
+        q = [15,15,15,14,14,14,13,13,13,12,12,12,11,11,11];
         scoreLimit = 15;
         x = "h";
     }
 };
+
+function cheat() {
+    for (i=0;i<scoreLimit;i++){
+        uUp();
+    }
+}
 
 // Used to reset all the variables
 function reset() {
@@ -95,6 +101,7 @@ function reset() {
 // Reset the Levels (For Progressive gameplay)
 function resetLevels() {
     pl = 0; // Resets current level
+    plo = 0;
     v = false; // Turns off progressive levels
 }
 
