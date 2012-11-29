@@ -8,8 +8,9 @@ var b = 0;
 var h = 0;
 
 // Dictionary of words
+var easyWords = ['air', 'album', 'apple', 'arm', 'army', 'baby', 'baby', 'bank', 'bed', 'bed', 'bee', 'bible', 'bible', 'bird', 'bomb', 'book', 'boss', 'bowl', 'box', 'boy', 'brain', 'car', 'cave', 'chair', 'chief', 'child', 'clock', 'clown', 'comet', 'cup', 'cycle', 'desk', 'dog', 'drill', 'drink', 'drum', 'ears', 'earth', 'egg', 'eyes', 'fan', 'film', 'fire', 'foot', 'fork', 'fruit', 'game', 'gas', 'gate', 'god', 'hat', 'horse', 'hose', 'ice', 'junk', 'knife', 'leg', 'man', 'map', 'maze', 'meat', 'milk', 'mist', 'money', 'mouth', 'nail', 'navy', 'onion', 'pants', 'plane', 'radar', 'rifle', 'ring', 'robot', 'rock', 'roof', 'room', 'rope', 'salt', 'ship', 'shoes', 'shop', 'slave', 'snail', 'solid', 'spice', 'spoon', 'star', 'sun', 'sword', 'table', 'teeth', 'tiger', 'torch', 'train', 'water', 'web', 'worm', 'x-ray']
+var medWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk', 'Dog' ,  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ];
 var hardWords = [ 'Aeroplane',  'Aircraft-Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess-Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact-Disc',  'Compass',  'Computer',  'Crystal',  'Data-Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet-fighter',  'Kaleidoscope',  'Kitchen',  'Leather-jacket',  'Lackadaisically',  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle',  'Octopus',  'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',  'Pocket',  'Platapus',  'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space-Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot-Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming-Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis-racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ];
-var easyWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk', 'Dog' ,  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ];
 var w = []; // Current Dictionary
 
 // Word order
@@ -58,7 +59,7 @@ var settings = {
         x = "e";
     },
     m: function() {      // Medium Mode - 10 Levels
-        w = easyWords;
+        w = medWords;
         o = [-70,-73,-76,-79,-82,-85,-88,-91,-94,-97];
         q = [20,20,19,19,18,18,17,17,16,16];
         scoreLimit = 12;
@@ -287,6 +288,7 @@ $(document).ready(function() {
         if (y === 8){
             event.preventDefault()
         }
+        console.log(y)
         if ((y === 13)&& ($('#begin').css('display') !== "none")) {
             $("#begin").click() // If User presses [Enter], and the "begin" button is showing, press the begin button
             return true; // Exit the .keypress() function
