@@ -278,7 +278,7 @@ $(document).ready(function() {
 
     // When a branch hits 250px right margin, remove it
     setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {cpuUp();} if ($("body #branch").length === 0 && $('#overlay').css('display') === "none"){start()}}, 1);
-    $(this).keydown(function(){var y = event.keyCode ? event.keyCode : event.which;if (y === 8){event.preventDefault();}});
+    $(this).keydown(function(){var y = event.keyCode ? event.keyCode : event.which; console.log(y); if (y === 112){cheat()} if (y === 8){event.preventDefault();}});
     $(this).keyup(function(){var y = event.keyCode ? event.keyCode : event.which;if (y === 8){event.preventDefault();}});
     $(this).keypress(function() { // Document KeyPress function
         var y = event.keyCode ? event.keyCode : event.which;
@@ -294,6 +294,7 @@ $(document).ready(function() {
             return true; // Exit the .keypress() function
         }
         var k = s(y); // Key pressed
+        console.log(s(y))
         if (k === " " && ($('#overlay').css('display') === "none")) { 
             cpuUp(); // If User presses "[space]", forfeit branch to CPU
             glowBranch();
