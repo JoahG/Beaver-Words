@@ -12,7 +12,6 @@ var easyWords = ['air', 'album', 'apple', 'arm', 'army', 'baby', 'baby', 'bank',
 var medWords = [ 'Air',  'Album',  'Apple',  'Arm',  'Army',  'Baby',  'Baby',  'Bank',  'Bed',  'Bed',  'Bee',  'Bible',  'Bible',  'Bird',  'Bomb',  'Book',  'Boss',  'Bowl',  'Box',  'Boy',  'Brain',  'Car',  'Cave',  'Chair',  'Chief',  'Child',  'Clock',  'Clown',  'Comet',  'Cup',  'Cycle',  'Desk', 'Dog' ,  'Drill',  'Drink',  'Drum',  'Ears',  'Earth',  'Egg',  'Eyes',  'Fan',  'Film',  'Fire',  'Foot',  'Fork',  'Fruit',  'Game',  'Gas',  'Gate',  'God',  'Hat',  'Horse',  'Hose',  'Ice',  'Junk',  'Knife',  'Leg',  'Man',  'Map',  'Maze',  'Meat',  'Milk',  'Mist',  'Money',  'Mouth',  'Nail',  'Navy',  'Onion',  'Pants',  'Plane',  'Radar',  'Rifle',  'Ring',  'Robot',  'Rock',  'Roof',  'Room',  'Rope',  'Salt',  'Ship',  'Shoes',  'Shop',  'Slave',  'Snail',  'Solid',  'Spice',  'Spoon',  'Star',  'Sun',  'Sword',  'Table',  'Teeth',  'Tiger',  'Torch',  'Train',  'Water',  'Web',  'Worm',  'X-ray' ];
 var hardWords = [ 'Aeroplane',  'Aircraft-Carrier',  'Airforce',  'Airport',  'Alphabet',  'Backpack',  'Balloon',  'Banana',  'Barbecue',  'Bathroom',  'Bathtub',  'Bottle',  'Bridge',  'Butterfly',  'Button',  'Cappuccino',  'Car-race',  'Carpet',  'Carrot',  'Chess-Board',  'Chisel',  'Chocolates',  'Church',  'Church',  'Circle',  'Circus',  'Circus',  'Coffee',  'Coffee-shop',  'Compact-Disc',  'Compass',  'Computer',  'Crystal',  'Data-Base',  'Diamond',  'Electricity',  'Elephant',  'Eraser',  'Explosive',  'Family',  'Feather',  'Festival',  'Finger',  'Floodlight',  'Flower',  'Freeway',  'Fungus',  'Garden',  'Gemstone',  'Gloves',  'Grapes',  'Guitar',  'Hammer',  'Hieroglyph',  'Highway',  'Ice-cream',  'Insect',  'Jet-fighter',  'Kaleidoscope',  'Kitchen',  'Leather-jacket',  'Lackadaisically',  'Library',  'Liquid',  'Magnet',  'Meteor',  'Microscope',  'Milkshake',  'Monster',  'Mosquito',  'Necklace',  'Needle',  'Octopus',  'Paintbrush',  'Parachute',  'Passport',  'Pebble',  'Pendulum',  'Pepper',  'Perfume',  'Pillow',  'Planet',  'Pocket',  'Platapus',  'Post-office',  'Potato',  'Printer',  'Prison',  'Pyramid',  'Rainbow',  'Record',  'Restaurant',  'Rocket',  'Saddle',  'Sandpaper',  'Sandwich',  'Satellite',  'School',  'Shower',  'Signature',  'Skeleton',  'Software',  'Space-Shuttle',  'Spectrum',  'Sphere',  'Spiral',  'Sports-car',  'Spot-Light',  'Square',  'Staircase',  'Stomach',  'Sunglasses',  'Surveyor',  'Swimming-Pool',  'Tapestry',  'Telescope',  'Television',  'Tennis-racquet',  'Thermometer',  'Toilet',  'Tongue',  'Torpedo',  'Treadmill',  'Triangle',  'Tunnel',  'Typewriter',  'Umbrella',  'Vacuum',  'Videotape',  'Vulture',  'Weapon',  'Wheelchair',  'Window' ];
 var w = []; // Current Dictionary
-var we = []; 
 
 // Word order
 var c = [];
@@ -80,7 +79,7 @@ function cheat() {
 
 // Used to reset all the variables
 function reset() {
-    $(".filler").css("height", 0)
+    $(".filler").css("height", 0);
     b = 0; // Sets the number of branches to 0
     h = 0; // Sets the current branch to 0
     c = []; // Empties the word order
@@ -90,7 +89,6 @@ function reset() {
     kr = false; // Turns Capital letters on (default)
     t = [];
     te = [];
-    we = [];
     hei = 80;
     while (hei <= 282) {
         t.push(hei);
@@ -144,9 +142,6 @@ function span(w) {
 function newBranch() {
     c.push(w[Math.floor((Math.random()*w.length))]); // Add a new random word to the word order list ('c')
     $("#container").append("<div id='branch' class='b"+b.toString(10)+" br"+ Math.floor((Math.random()*3)) +"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
-    if (w.length === 0){w = we; we = [];}
-    we.push(c[b]);
-    w.splice(w.indexOf(c[b]), 1)
     b += 1; // Add a branch to the counter variable
     z -= 1; // Lower the z-index counter by 1
     if (t.length === 0){t = te; te = [];}
