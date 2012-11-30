@@ -17,13 +17,13 @@ var w = []; // Current Dictionary
 var c = [];
 
 // Current Speed
-var q = 25;
+var q;
+
+// Space between branches (in px)
+var o;
 
 // Down-counter for z-index of branches
 var z = 10000;
-
-// Space between branches (in px)
-var o = -50;
 
 // Frontmost branch for removal
 var e = 0;
@@ -44,9 +44,6 @@ var i = 0; // Counter for current letter (of current word)
 
 var te;
 var t;
-
-// Disables Capital Letters
-var kr = false;
 
 // Settings variable for easy access/change
 var settings = {
@@ -281,12 +278,12 @@ $(document).ready(function() {
 
     // When a branch hits 250px right margin, remove it
     setInterval(function() {if (parseInt($("div#branch.b"+e.toString(10)).css("right"),10) === 250) {cpuUp();} if ($("body #branch").length === 0 && $('#overlay').css('display') === "none"){start()}}, 1);
-    $(this).keydown(function(){$(document).keypress()});
-    $(this).keyup(function(){$(document).keypress()});
+    $(this).keydown(function(){var y = event.keyCode ? event.keyCode : event.which;if (y === 8){event.preventDefault();}});
+    $(this).keyup(function(){var y = event.keyCode ? event.keyCode : event.which;if (y === 8){event.preventDefault();}});
     $(this).keypress(function() { // Document KeyPress function
-        var y = event.keyCode ? event.keyCode : event.which
+        var y = event.keyCode ? event.keyCode : event.which;
         if (y === 8){
-            event.preventDefault()
+            event.preventDefault();
         }
         console.log(y)
         if ((y === 13)&& ($('#begin').css('display') !== "none")) {
@@ -322,7 +319,7 @@ $(document).ready(function() {
 
         l = $("div#branch.b"+h.toString(10)+" span#"+i.toString(10)); // Current letter's <span>
 
-        if (k === l.text() || (!v && kr && k.toLowerCase() === (l.text().toLowerCase()))) { // If the User typed the correct letter - or Uppercase is disabled, and the user typed the lowercase version of the letter
+        if (k === l.text()) { // If the User typed the correct letter - or Uppercase is disabled, and the user typed the lowercase version of the letter
             l.css("color","green"); // Set the current letter to green
             i += 1; // Go to the next letter
         }
