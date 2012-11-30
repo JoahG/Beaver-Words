@@ -30,6 +30,10 @@ body, #container, #msg, #keyboard {
 	border-radius: 4px;
 }
 
+#preload {
+	display: none;
+}
+
 #top {
 	-webkit-border-top-left-radius: 4px;
 	-webkit-border-top-right-radius: 4px;
@@ -223,13 +227,13 @@ div#cdam {
 
 #choose {
 	text-align: center;
-	font-size: 20px;
+	font-size: 27px;
 }
 
 #choose ul {
 	position: absolute;
 	top: 45px;
-	left: 58px;
+	left: 35px;
 }
 
 #choose ul li {
@@ -237,7 +241,7 @@ div#cdam {
 	list-style-type: none;
 	cursor: pointer;
 	margin-left: 10px;
-	font-size: 18px;
+	font-size: 23px;
 }
 
 #keyb {

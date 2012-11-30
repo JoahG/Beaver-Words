@@ -220,6 +220,7 @@ function levelUp(a) {
 function uUp() {
     y += 1; // Increase the User's score by 1
     if (y === scoreLimit) { // If the User has completed his dam
+        console.log("called")
         levelUp()
     }
     $("#uFiller").css("height", y*(parseInt($("#udam").css("height"), 10)/scoreLimit))
@@ -285,7 +286,6 @@ $(document).ready(function() {
         if (y === 8){
             event.preventDefault();
         }
-        console.log(y)
         if ((y === 13)&& ($('#begin').css('display') !== "none")) {
             $("#begin").click() // If User presses [Enter], and the "begin" button is showing, press the begin button
             return true; // Exit the .keypress() function
