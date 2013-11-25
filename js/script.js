@@ -42,8 +42,8 @@ var x; // Order of levels (will be passed as parameters to startGame())
 
 var i = 0; // Counter for current letter (of current word)
 
-var te;
-var t;
+var te = [];
+var t = [80, 131, 182, 233];
 
 // Settings variable for easy access/change
 var settings = {
@@ -71,6 +71,16 @@ var settings = {
     }
 };
 
+if (typeof Array.prototype.splice === 'undefined') {
+    Array.prototype.splice = function (index, howmany, elemes) {
+        howmany = typeof howmany === 'undefined' || this.length;
+        var elems = Array.prototype.slice.call(arguments, 2), newArr = this.slice(0, index), last = this.slice(index + howmany);
+        newArr =  newArr.concat.apply(newArr, elems);
+        newArr =  newArr.concat.apply(newArr, last);
+        return newArr;
+    }
+}
+
 function cheat() {
     for (i=0;i<scoreLimit;i++){
         uUp();
@@ -87,13 +97,7 @@ function reset() {
     y = 0; // Resets User score
     p = 0; // Resets CPU Scoure
     kr = false; // Turns Capital letters on (default)
-    t = [];
-    te = [];
-    hei = 80;
-    while (hei <= 282) {
-        t.push(hei);
-        hei += branchHeight;
-    }
+    t = [80, 131, 182, 233];
 }
 
 // Reset the Levels (For Progressive gameplay)
@@ -138,18 +142,53 @@ function span(w) {
     return a.join(""); // Which is joined together into a longer string and returned
 }
 
+function genWord() {
+    var lastFew = [];
+    var wordList = w;
+    var wordOrder = c;
+    if (wordOrder.length > 2) {
+        lastFew = [wordOrder[wordOrder.length-3], wordOrder[wordOrder.length-2],wordOrder[wordOrder.length-1]];
+    } else {
+        for (n=0;n<wordOrder.length;n++){
+            lastFew.push(wordOrder[n]);
+        }
+    }
+    if (lastFew.length > 0){
+        for (n in lastFew){
+            wordList.splice(wordList.indexOf(lastFew[n]),1);
+        }
+    }
+    return wordList[Math.floor(Math.random()*wordList.length)];
+}
+
+function genTop() {
+    var lastFew = [];
+    var topList = [80, 131, 182, 233];
+    var topOrder = te;
+    if (topOrder.length > 2) {
+        lastFew = [topOrder[topOrder.length-3], topOrder[topOrder.length-2],topOrder[topOrder.length-1]];
+    } else {
+        for (n=0;n<topOrder.length;n++){
+            lastFew.push(topOrder[n]);
+        }
+    }
+    if (lastFew.length > 0){
+        for (n in lastFew){
+            topList.splice(topList.indexOf(lastFew[n]),1);
+        }
+    }
+    return topList[Math.floor(Math.random()*topList.length)];
+}
+
 // Adds a new branch to the #container
 function newBranch() {
-    c.push(w[Math.floor((Math.random()*w.length))]); // Add a new random word to the word order list ('c')
+    c.push(genWord()); // Add a new random word to the word order list ('c')
+    te.push(genTop());
     $("#container").append("<div id='branch' class='b"+b.toString(10)+" br"+ Math.floor((Math.random()*3)) +"'>"+span(c[b])+"</div>"); // Append a new branch to the container, using that word
     b += 1; // Add a branch to the counter variable
     z -= 1; // Lower the z-index counter by 1
-    if (t.length === 0){t = te; te = [];}
-    var top = t[Math.floor(Math.random()*t.length)]
-    te.push(top)
-    t.splice(t.indexOf(top), 1)
     $("div#branch.b"+(b-1).toString(10)).css("right", parseInt("-"+($("div#branch.b"+(b-1).toString(10)).css("width").toString(10)), 10)); // Make sure that the CSS 'right' property is set to the branch's width
-    $("div#branch.b"+(b-1).toString(10)).css("top", top ).css("z-index", z); // Set the z-index of the branch to the 'z' variable, to prevent reverse stacking
+    $("div#branch.b"+(b-1).toString(10)).css("top", te[te.length-1] ).css("z-index", z); // Set the z-index of the branch to the 'z' variable, to prevent reverse stacking
 }
 
 function glowBranch() {
