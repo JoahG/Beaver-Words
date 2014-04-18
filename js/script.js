@@ -395,6 +395,7 @@ $(document).ready(function() {
     $("#begin").click(function() {
         reset();
         start();
+        $('.hidden-field').focus();
     });
     $("#kclose").click(function() {
         $("#keyb").click()

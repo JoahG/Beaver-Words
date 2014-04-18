@@ -138,6 +138,14 @@ div#container {
 	font-family: "Trebuchet MS", sans-serif;
 }
 
+div.hidden {
+	overflow: hidden;
+	position: relative;
+	width: 1px;
+	height: 1px;
+	left: -500px;
+}
+
 div.bank {
 	text-align: left;
 	position: relative;
